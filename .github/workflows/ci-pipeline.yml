@@ -1,0 +1,67 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+  push:
+    branches-ignore:
+      - main
+      - dev
+
+jobs:
+  build:
+    if: github.event_name == 'pull_request'
+    name: Build Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Project
+        run: npm run build
+
+  lint_and_format:
+    name: Run Lint, Prettier and Check Types 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Prettier
+        run: npm run format:check
+      - name: Run Linter
+        run: npm run lint
+      - name: Run TypeScript Type Checks
+        run: npm run check-types
+
+  # Note: The tests block is commented out. Remove it if your project does not require running tests.
+  # tests:
+  #   name: Run Tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '18'
+  #         cache: 'npm'
+  #     - name: Install dependencies
+  #       run: npm ci
+  #     - name: Run Tests
+  #       run: npm test
+
