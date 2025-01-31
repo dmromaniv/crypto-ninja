@@ -10,7 +10,8 @@ interface InputProps {
   placeholder?: string;
   className?: string;
   iconButton?: ReactNode;
-  onChange: () => void;
+  isDisabled?: boolean;
+  onChange?: () => void;
 }
 
 const Input = ({
@@ -20,23 +21,24 @@ const Input = ({
   placeholder = "",
   className,
   iconButton,
+  isDisabled = false,
   onChange,
 }: InputProps) => {
   return (
     <label
-      htmlFor={name}
       className={clsx(
-        "relative block h-full overflow-hidden rounded-md border border-input shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary dark:border-input-dark",
+        "relative block h-full cursor-pointer rounded-md border border-input bg-accent shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary dark:border-input-dark dark:bg-accent-dark",
         label && "px-3 pt-3",
         placeholder && "px-3 py-1"
       )}
     >
       <input
         type={type}
-        id={name}
+        name={name}
         placeholder={placeholder}
+        disabled={isDisabled}
         className={clsx(
-          "peer h-full border-none bg-transparent text-fg/70 focus:border-transparent focus:ring-0 focus:outline-none sm:text-sm dark:text-fg-dark",
+          "peer h-full cursor-pointer border-none bg-transparent text-fg/70 focus:border-transparent focus:ring-0 focus:outline-none sm:text-sm dark:text-fg-dark",
           label && "py-1",
           placeholder && "py-0",
           iconButton && "w-[calc(100%-1.25rem)]",

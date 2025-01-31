@@ -1,12 +1,9 @@
 import Button from "@components/Button";
 import Language from "@components/Language";
-import Input from "@components/Input";
 import ThemeSwitch from "@components/ThemeSwitch";
 import Logo from "@components/Logo";
-import IconButton from "@components/IconButton";
-
-import SearchIcon from "@/assets/icons/SearchIcon";
-import BurgerIcon from "@/assets/icons/BurgerIcon";
+import SearchModal from "../Modals/SearchModal/SearchModal";
+import MobMenuModal from "../Modals/MobMenuModal/MobMenuModal";
 
 import navigation from "@/constants/navigation";
 
@@ -36,12 +33,7 @@ const Header = () => {
 
           <div className="flex items-center gap-x-8">
             <div className="hidden min-[560px]:block md:w-[300px]">
-              <Input
-                name="search"
-                onChange={() => {}}
-                label="test"
-                iconButton={<SearchIcon width={16} height={16} />}
-              />
+              <SearchModal />
             </div>
 
             <div className="hidden items-center gap-x-4 lg:flex lg:gap-x-8">
@@ -49,19 +41,18 @@ const Header = () => {
               <ThemeSwitch />
 
               <div className="flex gap-2">
-                <Button onClick={() => {}}>Login</Button>
-                <Button onClick={() => {}} variant="bordered">
-                  Sign up
-                </Button>
+                <div className="min-w-25">
+                  <Button onClick={() => {}}>Login</Button>
+                </div>
+                <div className="min-w-25">
+                  <Button onClick={() => {}} variant="bordered">
+                    Sign up
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="block lg:hidden">
-              <IconButton
-                onClick={() => {}}
-                className="transition-colors hover:text-primary hover:dark:text-fg-dark"
-              >
-                <BurgerIcon />
-              </IconButton>
+              <MobMenuModal />
             </div>
           </div>
         </div>

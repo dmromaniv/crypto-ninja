@@ -1,10 +1,10 @@
-import Header from "@/components/Header";
+import MainLayout from "@/layouts/MainLayout";
 
 const HomePage = () => {
   return (
-    <>
-      <Header />
-    </>
+    <MainLayout>
+      <div>Home page</div>
+    </MainLayout>
   );
 };
 

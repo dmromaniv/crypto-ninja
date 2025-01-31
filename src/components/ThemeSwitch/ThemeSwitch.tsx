@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-import SunIcon from "@/assets/icons/SunIcon";
 import IconButton from "../IconButton";
+import Tooltip from "../Tooltip/Tooltip";
+
+import SunIcon from "@/assets/icons/SunIcon";
 import MoonIcon from "@/assets/icons/MoonIcon";
 
 const ThemeSwitch = () => {
@@ -13,12 +15,14 @@ const ThemeSwitch = () => {
   };
 
   return (
-    <IconButton
-      onClick={onThemeToggle}
-      className="text-primary transition duration-300 hover:text-fg dark:text-warm dark:hover:text-fg-dark"
-    >
-      {isNightMode ? <MoonIcon width={12} height={12} /> : <SunIcon width={16} height={16} />}
-    </IconButton>
+    <Tooltip text="Use to change theme">
+      <IconButton
+        onClick={onThemeToggle}
+        className="text-primary transition duration-300 hover:text-fg dark:text-warm dark:hover:text-fg-dark"
+      >
+        {isNightMode ? <MoonIcon width={12} height={12} /> : <SunIcon width={16} height={16} />}
+      </IconButton>
+    </Tooltip>
   );
 };
 
