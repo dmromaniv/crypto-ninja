@@ -53,9 +53,13 @@
   --color-popover-dark: #020611;
   --color-popover-fg-dark: #f8f9fa;
 
-  --color-border-dark: #1f2937;
-  --color-input-dark: #1f2937;
+  --color-border-dark: #243041;
+  --color-input-dark: #243041;
   --color-ring-dark: #6d27d9;
+
+  --color-tooltip-dark: #243041;
+
+  --color-tab-dark: #243041;
 }
 
 .link-underscore {

@@ -1,4 +1,4 @@
-import Button from "@components/Button";
+import AuthButtons from "../AuthButtons";
 import Language from "@components/Language";
 import ThemeSwitch from "@components/ThemeSwitch";
 import Logo from "@components/Logo";
@@ -9,7 +9,7 @@ import navigation from "@/constants/navigation";
 
 const Header = () => {
   return (
-    <header className="bg-light dark:bg-dark">
+    <header className="bg-light dark:bg-accent-dark">
       <div className="container mx-auto flex h-20 items-center gap-8 px-4 sm:px-6 lg:px-8">
         <a href="#">
           <span className="sr-only">Home</span>
@@ -18,7 +18,7 @@ const Header = () => {
 
         <div className="flex flex-1 items-center justify-end md:justify-between">
           <nav aria-label="Global" className="hidden md:block">
-            <ul className="flex items-center gap-6 text-sm">
+            <ul className="flex items-center gap-6">
               {navigation.map((link, index) => {
                 return (
                   <li key={`${link.name}-${index}`}>
@@ -40,16 +40,7 @@ const Header = () => {
               <Language />
               <ThemeSwitch />
 
-              <div className="flex gap-2">
-                <div className="min-w-25">
-                  <Button onClick={() => {}}>Login</Button>
-                </div>
-                <div className="min-w-25">
-                  <Button onClick={() => {}} variant="bordered">
-                    Sign up
-                  </Button>
-                </div>
-              </div>
+              <AuthButtons />
             </div>
             <div className="block lg:hidden">
               <MobMenuModal />

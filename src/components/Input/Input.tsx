@@ -27,7 +27,7 @@ const Input = ({
   return (
     <label
       className={clsx(
-        "relative block h-full cursor-pointer rounded-md border border-input bg-accent shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary dark:border-input-dark dark:bg-accent-dark",
+        "relative block h-full cursor-pointer rounded-md border border-input bg-accent shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary dark:border-border-dark dark:bg-input-dark",
         label && "px-3 pt-3",
         placeholder && "px-3 py-1"
       )}
@@ -38,7 +38,7 @@ const Input = ({
         placeholder={placeholder}
         disabled={isDisabled}
         className={clsx(
-          "peer h-full cursor-pointer border-none bg-transparent text-fg/70 focus:border-transparent focus:ring-0 focus:outline-none sm:text-sm dark:text-fg-dark",
+          "peer h-full cursor-pointer border-none bg-transparent text-sm text-fg/90 focus:border-transparent focus:ring-0 focus:outline-none dark:text-fg-dark",
           label && "py-1",
           placeholder && "py-0",
           iconButton && "w-[calc(100%-1.25rem)]",
