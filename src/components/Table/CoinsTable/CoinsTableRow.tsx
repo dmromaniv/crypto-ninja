@@ -3,9 +3,11 @@ import SparklineChart from "@/components/Charts/SparklineChart/SparklineChart";
 
 import { formatNumber } from "@/utils/format";
 
+import { type Coin } from "@/types/coin";
+
 interface CoinsTableRowProps {
   // eslint-disable-next-line
-  coinsData: any[];
+  coinsData: Coin[];
 }
 
 const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
@@ -18,7 +20,7 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
               <td>{coin.market_cap_rank}</td>
               <td>
                 <div className="flex flex-wrap items-center gap-2 font-medium">
-                  <img src={coin.image} width={24} height={24} />
+                  <img src={coin.image} width={24} height={24} alt={`${coin.name} icon`} />
                   <p>
                     {coin.name}
                     <span className="pl-2 text-xs font-light uppercase">{coin.symbol}</span>
@@ -31,7 +33,7 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
               </td>
               <td>
                 <ChangePercentage
-                  percentage={coin.price_change_percentage_7d_in_currency.toFixed(2)}
+                  percentage={Number(coin.price_change_percentage_7d_in_currency.toFixed(2))}
                 />
               </td>
               <td>{formatNumber(coin.market_cap)}</td>

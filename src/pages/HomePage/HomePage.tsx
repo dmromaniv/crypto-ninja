@@ -1,13 +1,10 @@
-import CoinsTable from "@/components/Table/CoinsTable";
-
+import CoinsSection from "@/components/Sections/CoinsSection/CoinsSection";
 import MainLayout from "@/layouts/MainLayout";
 
 const HomePage = () => {
   return (
     <MainLayout>
-      <div className="mt-10">
-        <CoinsTable />
-      </div>
+      <CoinsSection />
     </MainLayout>
   );
 };
