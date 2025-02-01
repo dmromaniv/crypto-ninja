@@ -22,6 +22,7 @@
   --color-accent-fg: #111827;
   --color-destructive: #ee4444;
   --color-destructive-fg: #f8f9fa;
+  --color-success: #16a349;
   --color-warm: #f28c07;
 
   --color-card: #ffffff;
@@ -33,7 +34,7 @@
   --color-input: #e5e7eb;
   --color-ring: #7b39ed;
 
-  /* Dark Theme */
+  /* Dark Theme #020611*/
   --color-dark: #020611;
   --color-fg-dark: #f8f9fa;
 
