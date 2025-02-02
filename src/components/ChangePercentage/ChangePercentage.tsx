@@ -2,9 +2,10 @@ import clsx from "clsx";
 
 interface ChangePercentageProps {
   percentage: number;
+  minimumFractionDigits?: number;
 }
 
-const ChangePercentage = ({ percentage }: ChangePercentageProps) => {
+const ChangePercentage = ({ percentage, minimumFractionDigits = 2 }: ChangePercentageProps) => {
   return (
     <span
       className={clsx(
@@ -16,7 +17,7 @@ const ChangePercentage = ({ percentage }: ChangePercentageProps) => {
         percentage === 0 && "text-accent-fg dark:text-fg-dark"
       )}
     >
-      {Math.abs(percentage)}%
+      {Math.abs(percentage).toFixed(minimumFractionDigits)}%
     </span>
   );
 };

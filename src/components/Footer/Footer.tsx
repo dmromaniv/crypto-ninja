@@ -3,7 +3,7 @@ import LogoIcon from "@/assets/icons/LogoIcon";
 const Footer = () => {
   return (
     <footer className="bg-accent dark:bg-accent-dark">
-      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-[1300px] px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-start gap-y-6 md:flex-row md:justify-between">
           <div className="flex w-full items-start justify-start gap-x-5 md:items-center">
             <a href="#">

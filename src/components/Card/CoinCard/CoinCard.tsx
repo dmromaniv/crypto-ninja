@@ -4,7 +4,7 @@ import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 
 import ArrowIcon from "@/assets/icons/ArrowIcon";
 
-import { formatNumber } from "@/utils/format";
+import { formatCurrency } from "@/utils/format";
 
 import { type Coin } from "@/types/coin";
 
@@ -34,10 +34,10 @@ const CoinCard = ({ coin }: CoinCardProps) => {
       <div className="min-[500px]:justify-betweens flex flex-col gap-x-1 min-[500px]:flex-row">
         <div className="w-full min-[500px]:w-1/2">
           <p>
-            Price: <span className="font-medium">{formatNumber(coin.current_price)}</span>
+            Price: <span className="font-medium">{formatCurrency(coin.current_price)}</span>
           </p>
           <p>
-            Market cap: <span className="font-medium">{formatNumber(coin.market_cap)}</span>
+            Market cap: <span className="font-medium">{formatCurrency(coin.market_cap)}</span>
           </p>
           <div className="mt-2 flex gap-x-4 min-[500px]:mt-4">
             <p className="flex gap-x-1">
@@ -45,9 +45,7 @@ const CoinCard = ({ coin }: CoinCardProps) => {
             </p>
             <p className="flex gap-x-1">
               7d:
-              <ChangePercentage
-                percentage={Number(coin.price_change_percentage_7d_in_currency.toFixed(2))}
-              />
+              <ChangePercentage percentage={coin.price_change_percentage_7d_in_currency} />
             </p>
           </div>
         </div>

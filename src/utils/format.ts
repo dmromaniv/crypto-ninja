@@ -1,5 +1,8 @@
-export const formatNumber = (num: number): string => {
-  return (
-    num.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + " USD"
-  );
+export const formatCurrency = (num: number): string => {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    notation: "compact",
+  });
+  return formatter.format(num);
 };

@@ -1,12 +1,11 @@
 import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 import SparklineChart from "@/components/Charts/SparklineChart/SparklineChart";
 
-import { formatNumber } from "@/utils/format";
+import { formatCurrency } from "@/utils/format";
 
 import { type Coin } from "@/types/coin";
 
 interface CoinsTableRowProps {
-  // eslint-disable-next-line
   coinsData: Coin[];
 }
 
@@ -27,7 +26,7 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
                   </p>
                 </div>
               </td>
-              <td className="font-medium">{formatNumber(coin.current_price)}</td>
+              <td className="font-medium">{formatCurrency(coin.current_price)}</td>
               <td>
                 <ChangePercentage percentage={3.01} />
               </td>
@@ -36,7 +35,7 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
                   percentage={Number(coin.price_change_percentage_7d_in_currency.toFixed(2))}
                 />
               </td>
-              <td>{formatNumber(coin.market_cap)}</td>
+              <td>{formatCurrency(coin.market_cap)}</td>
               <td className="h-18">
                 <SparklineChart
                   data={coin.sparkline_in_7d.price}

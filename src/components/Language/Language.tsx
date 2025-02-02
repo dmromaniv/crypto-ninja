@@ -11,7 +11,7 @@ const Language = () => {
   };
 
   return (
-    <div className="flex gap-x-2 text-sm font-medium">
+    <div className="flex items-center gap-x-2 text-sm font-medium">
       <button
         onClick={() => {
           onLanguageChange("ENG");
