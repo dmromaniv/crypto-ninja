@@ -1,27 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme {
+  --font-display: "Space Grotesk", "serif";
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Light Theme */
+
+  /* Background */
+  --color-light: #ffffff;
+  /* Foreground */
+  --color-fg: #020611;
+
+  --color-primary: #7b39ed;
+  --color-primary-fg: #f8f9fa;
+  --color-secondary: #f3f4f6;
+  --color-secondary-fg: #111827;
+  --color-muted: #f3f4f6;
+  --color-muted-fg: #6b7280;
+  --color-accent: #f3f4f6;
+  --color-accent-fg: #111827;
+  --color-destructive: #ee4444;
+  --color-destructive-fg: #f8f9fa;
+  --color-success: #16a349;
+  --color-warm: #f28c07;
+
+  --color-card: #ffffff;
+  --color-card-fg: #020611;
+  --color-popover: #ffffff;
+  --color-popover-fg: #020611;
+
+  --color-border: #e5e7eb;
+  --color-input: #e5e7eb;
+  --color-ring: #7b39ed;
+
+  /* Dark Theme #020611*/
+  --color-dark: #020611;
+  --color-fg-dark: #f8f9fa;
+
+  --color-primary-dark: #6d27d9;
+  --color-primary-fg-dark: #f8f9fa;
+  --color-secondary-dark: #1f2937;
+  --color-secondary-fg-dark: #f8f9fa;
+  --color-muted-dark: #1f2937;
+  --color-muted-fg-dark: #9ca2ae;
+  --color-accent-dark: #1f2937;
+  --color-accent-fg-dark: #f8f9fa;
+  --color-destructive-dark: #7f1d1d;
+  --color-destructive-fg-dark: #f8f9fa;
+
+  --color-card-dark: #020611;
+  --color-card-fg-dark: #f8f9fa;
+  --color-popover-dark: #020611;
+  --color-popover-fg-dark: #f8f9fa;
+
+  --color-border-dark: #243041;
+  --color-input-dark: #243041;
+  --color-ring-dark: #6d27d9;
+
+  --color-hover-dark: #243041;
+
+  --color-tooltip-dark: #243041;
+
+  --color-tab-dark: #243041;
 }
 
-body {
-  min-height: 100vh;
-  padding: 2rem;
-
-  text-align: center;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.link-underscore {
+  @apply relative text-fg/80 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100 dark:text-fg-dark;
 }

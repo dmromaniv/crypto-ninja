@@ -3,4 +3,4 @@ build
 coverage
 
 # Ignore assets inside src:
-src/assets
+#src/assets
