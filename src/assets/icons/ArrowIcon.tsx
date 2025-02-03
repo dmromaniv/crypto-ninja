@@ -1,9 +1,12 @@
+import clsx from "clsx";
+
 interface ArrowIconProps {
   width?: number;
   height?: number;
+  arrowDirection?: "up" | "down" | "right" | "left";
 }
 
-const ArrowIcon = ({ width = 24, height = 24 }: ArrowIconProps) => {
+const ArrowIcon = ({ width = 24, height = 24, arrowDirection = "up" }: ArrowIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,6 +14,11 @@ const ArrowIcon = ({ width = 24, height = 24 }: ArrowIconProps) => {
       height={height}
       viewBox="0 0 20 20"
       fill="currentColor"
+      className={clsx(
+        arrowDirection === "right" && "rotate-90",
+        arrowDirection === "down" && "rotate-180",
+        arrowDirection === "left" && "rotate-270"
+      )}
     >
       <path
         fillRule="evenodd"

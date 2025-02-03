@@ -1,4 +1,5 @@
 import CoinsList from "@/components/CoinsList/CoinsList";
+import Select from "@/components/Select/Select";
 import CoinsTable from "@/components/Table/CoinsTable";
 
 const MOCK_DATA = [
@@ -1405,8 +1406,25 @@ const MOCK_DATA = [
 ];
 
 const CoinsSection = () => {
+  const onCategoryChange = (category: string | string[]) => {
+    return category;
+  };
+
   return (
     <section>
+      <div className="mb-4 ml-auto w-60 justify-end text-end">
+        <Select
+          menuPosition="bottom"
+          searchable
+          multiple
+          onChange={onCategoryChange}
+          options={[
+            { label: "test", value: "1" },
+            { label: "test2", value: "2" },
+            { label: "test3", value: "3" },
+          ]}
+        />
+      </div>
       <div className="hidden lg:block">
         <CoinsTable coins={MOCK_DATA} />
       </div>

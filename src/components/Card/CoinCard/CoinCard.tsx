@@ -26,9 +26,7 @@ const CoinCard = ({ coin }: CoinCardProps) => {
           className="flex items-center text-accent-fg/80 transition-colors hover:text-primary hover:underline dark:text-fg-dark hover:dark:text-primary-dark"
         >
           View more
-          <span className="rotate-90">
-            <ArrowIcon width={20} height={20} />
-          </span>
+          <ArrowIcon width={20} height={20} arrowDirection="right" />
         </a>
       </div>
       <div className="min-[500px]:justify-betweens flex flex-col gap-x-1 min-[500px]:flex-row">
