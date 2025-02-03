@@ -1,6 +1,26 @@
+#  Assets
+public/
+
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.mp3
+*.wav
+*.ogg
+*.mp4
+*.mov
+*.avi
+
+# Git
+.git
+.gitignore
+
 # Ignore artifacts:
 build
 coverage
 
-# Ignore assets inside src:
-#src/assets
+
+
