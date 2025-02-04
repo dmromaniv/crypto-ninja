@@ -15,7 +15,7 @@ const SparklineChart = ({ data, variant = "base" }: SparklineChartProps) => {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data.map((value, index) => ({ index, value }))}>
+      <LineChart width={20} height={20} data={data.map((value, index) => ({ index, value }))}>
         <YAxis domain={["auto", "auto"]} hide />
         <Line type="monotone" dataKey="value" strokeWidth={2} dot={false} stroke={chartStroke} />
       </LineChart>

@@ -1,6 +1,4 @@
-export const getLeadingCryptos = <T extends object>(amount: number, leadingCryptos: T) => {
-  if (!leadingCryptos || typeof leadingCryptos !== "object") return [];
-
+export const getLeadingCryptos = <T extends object>(amount: number, leadingCryptos?: T) => {
   const sortedCryptos = sortCryptos("desc", leadingCryptos);
 
   if (amount > sortedCryptos.length) {
@@ -11,7 +9,7 @@ export const getLeadingCryptos = <T extends object>(amount: number, leadingCrypt
 };
 
 // return sorted array in [[key, value]] format
-const sortCryptos = <T extends object>(order: "desc" | "asc", leadingCryptos: T) => {
+const sortCryptos = <T extends object>(order: "desc" | "asc", leadingCryptos?: T) => {
   if (!leadingCryptos || typeof leadingCryptos !== "object") return [];
 
   return Object.entries(leadingCryptos).sort(([, a], [, b]) => {

@@ -41,11 +41,11 @@ const Select = ({
         ? selected.filter((item) => item !== value)
         : [...selected, value];
     } else {
-      newSelected = [value];
+      newSelected = selected.includes(value) ? [] : [value];
     }
 
     setSelected(newSelected);
-    onChange(multiple ? newSelected : newSelected[0]);
+    onChange(multiple ? newSelected : newSelected[0] || []);
     if (!multiple) setIsOpen(false);
   };
 
@@ -119,17 +119,23 @@ const Select = ({
                 <li
                   key={option.value}
                   className={clsx(
-                    "flex cursor-pointer items-center justify-between p-3 hover:bg-accent dark:hover:bg-hover-dark",
+                    "flex cursor-pointer items-center justify-between p-3 text-start hover:bg-accent dark:hover:bg-hover-dark",
                     selected.includes(option.value) && "bg-accent dark:bg-hover-dark"
                   )}
                   onClick={() => onSelect(option.value)}
                 >
                   <span>{option.label}</span>
-                  {selected.includes(option.value) && <TickIcon />}
+                  {selected.includes(option.value) && (
+                    <span className="min-h-4 min-w-4">
+                      <TickIcon width={16} height={16} />
+                    </span>
+                  )}
                 </li>
               ))
             ) : (
-              <p className="p-3 text-sm text-muted-fg dark:text-muted-fg-dark">No results found</p>
+              <p className="p-3 text-start text-sm text-muted-fg dark:text-muted-fg-dark">
+                No results found
+              </p>
             )}
           </ul>
         </div>

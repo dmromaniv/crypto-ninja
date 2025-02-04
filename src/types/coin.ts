@@ -6,28 +6,8 @@ export interface Coin {
   current_price: number;
   market_cap: number;
   market_cap_rank: number;
-  fully_diluted_valuation: number;
-  total_volume: number;
-  high_24h: number;
-  low_24h: number;
-  price_change_24h: number;
-  price_change_percentage_24h: number;
-  market_cap_change_24h: number;
-  market_cap_change_percentage_24h: number;
-  circulating_supply: number;
-  total_supply: number;
-  max_supply: number | null;
-  ath: number;
-  ath_change_percentage: number;
-  ath_date: string;
-  atl: number | null;
-  atl_change_percentage: number;
-  atl_date: string;
-  roi: Roi | null;
-  last_updated: string;
   sparkline_in_7d: Sparkline;
   price_change_percentage_7d_in_currency: number;
-  price_change_percentage_1h_in_currency: number;
   price_change_percentage_24h_in_currency: number;
 }
 
@@ -35,8 +15,57 @@ interface Sparkline {
   price: number[];
 }
 
-interface Roi {
-  times: number;
+export interface CoinCategory {
+  category_id: string;
+  name: string;
+}
+
+export interface TrendingData {
+  coins: TrendingCoin[];
+  categories: TrendingCategory[];
+}
+
+export interface TrendingCoin {
+  item: {
+    id: string;
+    coin_id: number;
+    symbol: string;
+    name: string;
+    thumb: string;
+    data: {
+      price: number;
+      price_change_percentage_24h: {
+        [x: string]: number;
+      };
+    };
+  };
+}
+
+export interface SearchedCoin {
+  id: string;
+  coin_id: number;
+  symbol: string;
+  market_cap_rank: number;
+  name: string;
+  thumb: string;
+}
+
+export interface TrendingCategory {
+  id: string;
+  name: string;
+  data: {
+    market_cap: number;
+    market_cap_change_percentage_24h: {
+      [x: string]: number;
+    };
+  };
+}
+
+// Types of query params
+export interface CoinQueryParams {
   currency: string;
-  percentage: number;
+  order?: string;
+  perPage?: number;
+  page?: number;
+  category?: string;
 }
