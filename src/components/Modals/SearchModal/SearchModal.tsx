@@ -74,7 +74,7 @@ const SearchModal = () => {
               onChange={onInputChange}
             />
             <div className="h-full overflow-y-auto">
-              {searchQuery && searchedCoins?.length > 0 ? (
+              {!!searchedCoins?.length && searchQuery ? (
                 <ul>
                   {searchedCoins?.map((coin) => {
                     return (
