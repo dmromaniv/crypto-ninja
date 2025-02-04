@@ -32,10 +32,12 @@ const CoinCard = ({ coin }: CoinCardProps) => {
       <div className="min-[500px]:justify-betweens flex flex-col gap-x-1 min-[500px]:flex-row">
         <div className="w-full min-[500px]:w-1/2">
           <p>
-            Price: <span className="font-medium">{formatCurrency(coin.current_price)}</span>
+            Price:
+            <span className="font-medium">{formatCurrency({ number: coin.current_price })}</span>
           </p>
           <p>
-            Market cap: <span className="font-medium">{formatCurrency(coin.market_cap)}</span>
+            Market cap:
+            <span className="font-medium">{formatCurrency({ number: coin.market_cap })}</span>
           </p>
           <div className="mt-2 flex gap-x-4 min-[500px]:mt-4">
             <p className="flex gap-x-1">

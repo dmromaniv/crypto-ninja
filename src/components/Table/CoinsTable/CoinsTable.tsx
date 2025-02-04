@@ -11,7 +11,13 @@ interface CoinsTableProps {
 const CoinsTable = ({ coins }: CoinsTableProps) => {
   return (
     <Table tableHead={<CoinsTableHead />}>
-      <CoinsTableRow coinsData={coins} />
+      {coins.length > 0 ? (
+        <CoinsTableRow coinsData={coins} />
+      ) : (
+        <tr className="text-center">
+          <td colSpan={100}>No data provided</td>
+        </tr>
+      )}
     </Table>
   );
 };
