@@ -113,7 +113,7 @@ const Select = ({
             </div>
           )}
 
-          <ul className="max-h-60 overflow-y-auto">
+          <ul className="scrollbar-thin max-h-60 overflow-y-auto">
             {filteredOptions.length > 0 ? (
               filteredOptions.map((option) => (
                 <li

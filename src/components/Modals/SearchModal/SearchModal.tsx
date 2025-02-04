@@ -73,7 +73,7 @@ const SearchModal = () => {
               )}
               onChange={onInputChange}
             />
-            <div className="h-full overflow-y-auto">
+            <div className="scrollbar-thin h-full overflow-y-auto">
               {!!searchedCoins?.length && searchQuery ? (
                 <ul>
                   {searchedCoins?.map((coin) => {

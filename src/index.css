@@ -65,6 +65,8 @@
   --color-tab-dark: #243041;
 }
 
+@plugin 'tailwind-scrollbar';
+
 .link-underscore {
   @apply relative text-fg/80 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100 dark:text-fg-dark;
 }
