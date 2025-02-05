@@ -1,5 +1,8 @@
-import { formatCurrency } from "@/utils/format";
 import Card from "../Card";
+
+import { formatCurrency } from "@/utils/format";
+
+import { MESSAGES } from "@/constants/messages";
 
 interface TotalVolumeCardProps {
   totalVolume: number;
@@ -12,7 +15,9 @@ const TotalVolumeCard = ({ totalVolume }: TotalVolumeCardProps) => {
         <p className="flex items-center gap-x-2 text-lg font-medium">Total volume</p>
       </div>
       <p className="text-lg font-medium">
-        {formatCurrency({ number: totalVolume, notation: "compact" })}
+        {totalVolume
+          ? formatCurrency({ number: totalVolume, notation: "compact" })
+          : MESSAGES.NO_PROVIDED_DATA}
       </p>
     </Card>
   );
