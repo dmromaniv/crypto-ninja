@@ -7,6 +7,8 @@ import { useGetGlobalMarketDataQuery } from "@/store/api/market";
 import { getLeadingCryptos } from "@/utils/sort";
 import { dominanceCoinsConfig } from "@/config/uiConfig";
 
+import { MESSAGES } from "@/constants/messages";
+
 const GlobalMarket = () => {
   const { data, isFetching } = useGetGlobalMarketDataQuery();
 
@@ -23,7 +25,7 @@ const GlobalMarket = () => {
           <Skeleton className="h-4 min-w-8" />
         ) : (
           <span className="font-medium text-primary">
-            {data?.active_cryptocurrencies || "No actual data"}
+            {data?.active_cryptocurrencies || MESSAGES.NO_DATA}
           </span>
         )}
       </li>
@@ -32,15 +34,17 @@ const GlobalMarket = () => {
         {isFetching ? (
           <Skeleton className="h-4 min-w-6" />
         ) : (
-          <span className="font-medium text-primary">{data?.markets || "No actual data"}</span>
+          <span className="font-medium text-primary">{data?.markets || MESSAGES.NO_DATA}</span>
         )}
       </li>
       <li className="flex items-center gap-x-1">
         Market Cap:
         {isFetching ? (
           <Skeleton className="h-4 min-w-10" />
-        ) : (
+        ) : data?.market_cap_change_percentage_24h_usd ? (
           <ChangePercentage percentage={data?.market_cap_change_percentage_24h_usd || 0} />
+        ) : (
+          MESSAGES.NO_DATA
         )}
       </li>
       <li className="flex items-center gap-x-1">
@@ -51,13 +55,15 @@ const GlobalMarket = () => {
           leadingCryptos.map((coin) => {
             return (
               <p key={`${coin.name}`} className="flex gap-x-1">
-                <span className="uppercase">{coin.name}</span>
-                <span className="font-medium text-primary">{coin.value.toFixed(1)}%</span>
+                <span className="uppercase">{coin?.name}</span>
+                {coin?.value && (
+                  <span className="font-medium text-primary">{coin.value.toFixed(1)}%</span>
+                )}
               </p>
             );
           })
         ) : (
-          <p>No actual data</p>
+          <p>{MESSAGES.NO_DATA}</p>
         )}
       </li>
     </ul>

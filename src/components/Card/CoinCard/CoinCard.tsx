@@ -6,6 +6,8 @@ import ArrowIcon from "@/assets/icons/ArrowIcon";
 
 import { formatCurrency } from "@/utils/format";
 
+import { MESSAGES } from "@/constants/messages";
+
 import { type Coin } from "@/types/coin";
 
 interface CoinCardProps {
@@ -33,27 +35,48 @@ const CoinCard = ({ coin }: CoinCardProps) => {
         <div className="w-full min-[500px]:w-1/2">
           <p>
             Price:
-            <span className="font-medium">{formatCurrency({ number: coin.current_price })}</span>
+            <span className="font-medium">
+              {coin?.current_price
+                ? formatCurrency({ number: coin.current_price })
+                : MESSAGES.NO_PROVIDED_DATA}
+            </span>
           </p>
           <p>
             Market cap:
-            <span className="font-medium">{formatCurrency({ number: coin.market_cap })}</span>
+            <span className="font-medium">
+              {coin?.market_cap
+                ? formatCurrency({ number: coin.market_cap })
+                : MESSAGES.NO_PROVIDED_DATA}
+            </span>
           </p>
           <div className="mt-2 flex gap-x-4 min-[500px]:mt-4">
             <p className="flex gap-x-1">
-              24h: <ChangePercentage percentage={3.01} />
+              24h:
+              {coin?.price_change_percentage_24h_in_currency ? (
+                <ChangePercentage percentage={coin.price_change_percentage_24h_in_currency} />
+              ) : (
+                MESSAGES.EMPTY_CARD_VALUE
+              )}
             </p>
             <p className="flex gap-x-1">
               7d:
-              <ChangePercentage percentage={coin.price_change_percentage_7d_in_currency} />
+              {coin?.price_change_percentage_7d_in_currency ? (
+                <ChangePercentage percentage={coin.price_change_percentage_7d_in_currency} />
+              ) : (
+                MESSAGES.EMPTY_CARD_VALUE
+              )}
             </p>
           </div>
         </div>
         <div className="h-24 w-full min-[500px]:w-1/2">
-          <SparklineChart
-            data={coin.sparkline_in_7d.price}
-            variant={coin.price_change_percentage_7d_in_currency > 0 ? "success" : "destructive"}
-          />
+          {coin?.sparkline_in_7d.price ? (
+            <SparklineChart
+              data={coin.sparkline_in_7d.price}
+              variant={coin?.price_change_percentage_7d_in_currency > 0 ? "success" : "destructive"}
+            />
+          ) : (
+            MESSAGES.NO_PROVIDED_CHARTS
+          )}
         </div>
       </div>
     </Card>

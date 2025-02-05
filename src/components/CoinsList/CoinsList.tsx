@@ -1,5 +1,7 @@
 import CoinCard from "@/components/Card/CoinCard/CoinCard";
 
+import { MESSAGES } from "@/constants/messages";
+
 import { type Coin } from "@/types/coin";
 
 interface CoinsListProps {
@@ -7,7 +9,7 @@ interface CoinsListProps {
 }
 
 const CoinsList = ({ coins }: CoinsListProps) => {
-  return (
+  return coins.length > 0 ? (
     <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {coins.map((coin) => {
         return (
@@ -17,6 +19,8 @@ const CoinsList = ({ coins }: CoinsListProps) => {
         );
       })}
     </ul>
+  ) : (
+    <p className="text-center">{MESSAGES.NO_COINS}</p>
   );
 };
 

@@ -2,6 +2,8 @@ import Table from "../Table";
 import CoinsTableHead from "./CoinsTableHead";
 import CoinsTableRow from "./CoinsTableRow";
 
+import { MESSAGES } from "@/constants/messages";
+
 import { type Coin } from "@/types/coin";
 
 interface CoinsTableProps {
@@ -15,7 +17,7 @@ const CoinsTable = ({ coins }: CoinsTableProps) => {
         <CoinsTableRow coinsData={coins} />
       ) : (
         <tr className="text-center">
-          <td colSpan={100}>No data provided</td>
+          <td colSpan={100}>{MESSAGES.NO_COINS}</td>
         </tr>
       )}
     </Table>

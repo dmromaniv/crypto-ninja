@@ -1,5 +1,8 @@
-import { formatCurrency } from "@/utils/format";
 import Card from "../Card";
+
+import { formatCurrency } from "@/utils/format";
+
+import { MESSAGES } from "@/constants/messages";
 
 interface MarketCapCardProps {
   marketCap: number;
@@ -12,7 +15,9 @@ const MarketCapCard = ({ marketCap }: MarketCapCardProps) => {
         <p className="flex items-center gap-x-2 text-lg font-medium">Market cap</p>
       </div>
       <p className="text-lg font-medium">
-        {formatCurrency({ number: marketCap, notation: "compact" })}
+        {marketCap
+          ? formatCurrency({ number: marketCap, notation: "compact" })
+          : MESSAGES.NO_PROVIDED_DATA}
       </p>
     </Card>
   );
