@@ -13,7 +13,7 @@ const Table = ({ tableHead, children }: TableProps) => {
           {tableHead}
         </thead>
 
-        <tbody className="divide-y divide-border text-accent-fg dark:divide-border-dark dark:text-fg-dark [&_td]:p-2 [&_td]:whitespace-nowrap [&>tr]:cursor-pointer [&>tr]:transition-colors [&>tr]:duration-300 [&>tr]:odd:bg-accent [&>tr]:hover:bg-hover [&>tr]:dark:odd:bg-accent-dark [&>tr]:hover:dark:bg-hover-dark">
+        <tbody className="divide-y divide-border text-accent-fg dark:divide-border-dark dark:text-fg-dark [&_td]:p-2 [&_td]:whitespace-nowrap [&>tr]:cursor-pointer [&>tr]:odd:bg-accent [&>tr]:hover:bg-hover [&>tr]:dark:odd:bg-accent-dark [&>tr]:hover:dark:bg-hover-dark">
           {children}
         </tbody>
       </table>
