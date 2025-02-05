@@ -4,7 +4,7 @@ import { getItemFromLocalStorage, setItemToLocalStorage } from "@/services/local
 
 import LOCAL_STORAGE_KEYS from "@/constants/localStorage";
 
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark";
 
 export function useTheme() {
   const [theme, setTheme] = useState(

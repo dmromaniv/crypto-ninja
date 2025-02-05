@@ -5,17 +5,19 @@ import { getItemFromLocalStorage } from "@/services/localStorage";
 
 import LOCAL_STORAGE_KEYS from "@/constants/localStorage";
 
+import type { Theme } from "@/hooks/useTheme";
+
 interface SkeletonProviderProps {
   children: ReactNode;
 }
 
 export const SkeletonProvider = ({ children }: SkeletonProviderProps) => {
-  const isDarkMode = getItemFromLocalStorage(LOCAL_STORAGE_KEYS.theme, true);
+  const theme = getItemFromLocalStorage<Theme>(LOCAL_STORAGE_KEYS.theme, "light");
 
   return (
     <SkeletonTheme
-      baseColor={isDarkMode ? "#212B3B" : "#f3f4f6"}
-      highlightColor={isDarkMode ? "#243041" : "#ffffff"}
+      baseColor={theme === "dark" ? "#212B3B" : "#f3f4f6"}
+      highlightColor={theme === "dark" ? "#243041" : "#ffffff"}
     >
       {children}
     </SkeletonTheme>
