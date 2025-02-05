@@ -9,7 +9,7 @@ import TrendingCoinsListSkeleton from "@/components/TrendingCoinsList/TrendingCo
 
 import useModal from "@/hooks/useModal";
 
-import { useGetDataViaSearchQuery, useGetTrendingCryptoQuery } from "@/store/api/coins";
+import { useGetTrendingCryptoQuery, useLazyGetDataViaSearchQuery } from "@/store/api/coins";
 import { useDebounce } from "@/hooks/useDebounce";
 
 import { trendingCoinsConfig } from "@/config/uiConfig";
@@ -17,9 +17,9 @@ import { trendingCoinsConfig } from "@/config/uiConfig";
 const SearchModal = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { isModalOpen, onModalOpen, onModalClose } = useModal();
-  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
-  const { data: searchedCoins } = useGetDataViaSearchQuery(debouncedSearchQuery);
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
+  const [searchCoins, { data: searchedCoins }] = useLazyGetDataViaSearchQuery();
   const { data: trendingData, isFetching: isFetchingTrendingCoins } = useGetTrendingCryptoQuery();
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +35,12 @@ const SearchModal = () => {
     },
     [onModalOpen]
   );
+
+  useEffect(() => {
+    if (debouncedSearchQuery) {
+      searchCoins(debouncedSearchQuery);
+    }
+  }, [debouncedSearchQuery, searchCoins]);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyPress);
