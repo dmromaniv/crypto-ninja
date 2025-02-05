@@ -10,6 +10,7 @@ import "./index.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import { store } from "./store/store.ts";
+import { ToastContainer } from "react-toastify";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
       <Provider store={store}>
         <SkeletonProvider>
           <App />
+          <ToastContainer />
         </SkeletonProvider>
       </Provider>
     </BrowserRouter>
