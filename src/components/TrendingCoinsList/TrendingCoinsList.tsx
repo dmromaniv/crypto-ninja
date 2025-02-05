@@ -18,7 +18,7 @@ const TrendingCoinsList = ({ coins, count = coins.length }: TrendingCoinsListPro
         return (
           <li
             key={coin.coin_id}
-            className="flex min-h-14 cursor-pointer items-center justify-between gap-x-6 rounded-md p-2 hover:bg-accent/80"
+            className="flex min-h-14 cursor-pointer items-center justify-between gap-x-6 rounded-md p-2 hover:bg-accent/80 hover:dark:bg-hover-dark"
           >
             <div className="flex flex-1 items-center gap-x-2">
               <img

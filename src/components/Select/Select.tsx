@@ -81,7 +81,7 @@ const Select = ({
   return (
     <div className="relative w-full" ref={dropdownRef}>
       <button
-        className="flex w-full cursor-pointer items-center justify-between rounded-md border border-input bg-accent p-3 shadow-sm transition-opacity hover:bg-accent/70 dark:border-border-dark dark:bg-input-dark hover:dark:bg-input-dark/70"
+        className="flex w-full cursor-pointer items-center justify-between rounded-md border border-input bg-accent px-2 py-1 shadow-sm transition-opacity hover:bg-accent/70 dark:border-border-dark dark:bg-input-dark hover:dark:bg-input-dark/70"
         onClick={onButtonClick}
       >
         <span className="truncate">
