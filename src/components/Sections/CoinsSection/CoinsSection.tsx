@@ -5,6 +5,8 @@ import CoinsList from "@/components/CoinsList/CoinsList";
 import Pagination from "@/components/Pagination";
 import Select from "@/components/Select/Select";
 import CoinsTable from "@/components/Table/CoinsTable";
+import CoinsTableSkeleton from "@/components/Table/CoinsTable/CoinsTableSkeleton";
+import CoinsListSkeleton from "@/components/CoinsList/CoinsListSkeleton";
 
 import { usePagination } from "@/hooks/usePagination";
 import { useGetCategoriesQuery, useGetCoinsQuery } from "@/store/api/coins";
@@ -20,7 +22,7 @@ const CoinsSection = () => {
 
   const { page, itemsPerPage, onPageChange, onItemsPerPageSelect } = usePagination();
 
-  const { data: coins } = useGetCoinsQuery({
+  const { data: coins, isFetching: isCoinsFetching } = useGetCoinsQuery({
     currency: currencyConfig.USD.code,
     page,
     perPage: itemsPerPage,
@@ -61,10 +63,10 @@ const CoinsSection = () => {
         />
       </div>
       <div className="hidden lg:block">
-        <CoinsTable coins={coins || []} />
+        {isCoinsFetching ? <CoinsTableSkeleton /> : <CoinsTable coins={coins || []} />}
       </div>
       <div className="lg:hidden">
-        <CoinsList coins={coins || []} />
+        {isCoinsFetching ? <CoinsListSkeleton /> : <CoinsList coins={coins || []} />}
       </div>
 
       <div className="relative mt-8 flex w-full items-center justify-center">

@@ -4,8 +4,10 @@ import { Provider } from "react-redux";
 
 import { createRoot } from "react-dom/client";
 
+import { SkeletonProvider } from "./components/SkeletonProvider/SkeletonProvider.tsx";
 import App from "./App.tsx";
 import "./index.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { store } from "./store/store.ts";
 
@@ -13,7 +15,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <SkeletonProvider>
+          <App />
+        </SkeletonProvider>
       </Provider>
     </BrowserRouter>
   </StrictMode>
