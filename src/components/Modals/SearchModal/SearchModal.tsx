@@ -4,12 +4,15 @@ import { useCallback, useEffect, useState } from "react";
 import Input from "@/components/Input";
 import Modal from "../Modal";
 import Tooltip from "@/components/Tooltip/Tooltip";
+import TrendingCoinsList from "@/components/TrendingCoinsList/TrendingCoinsList";
+import TrendingCoinsListSkeleton from "@/components/TrendingCoinsList/TrendingCoinsListSkeleton";
 
 import useModal from "@/hooks/useModal";
-import TrendingCoinsList from "@/components/TrendingCoinsList/TrendingCoinsList";
+
 import { useGetDataViaSearchQuery, useGetTrendingCryptoQuery } from "@/store/api/coins";
-import { trendingCoinsConfig } from "@/config/uiConfig";
 import { useDebounce } from "@/hooks/useDebounce";
+
+import { trendingCoinsConfig } from "@/config/uiConfig";
 
 const SearchModal = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,7 +20,7 @@ const SearchModal = () => {
   const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const { data: searchedCoins } = useGetDataViaSearchQuery(debouncedSearchQuery);
 
-  const { data: trendingData } = useGetTrendingCryptoQuery();
+  const { data: trendingData, isFetching: isFetchingTrendingCoins } = useGetTrendingCryptoQuery();
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value.trimStart());
@@ -73,7 +76,7 @@ const SearchModal = () => {
               )}
               onChange={onInputChange}
             />
-            <div className="h-full overflow-y-auto">
+            <div className="scrollbar-thin h-full overflow-y-auto">
               {!!searchedCoins?.length && searchQuery ? (
                 <ul>
                   {searchedCoins?.map((coin) => {
@@ -102,10 +105,14 @@ const SearchModal = () => {
               ) : (
                 <>
                   <p className="mb-1">Trending coins</p>
-                  <TrendingCoinsList
-                    coins={trendingData?.coins || []}
-                    count={trendingCoinsConfig.searchModal.showInList}
-                  />
+                  {isFetchingTrendingCoins ? (
+                    <TrendingCoinsListSkeleton count={trendingCoinsConfig.searchModal.showInList} />
+                  ) : (
+                    <TrendingCoinsList
+                      coins={trendingData?.coins || []}
+                      count={trendingCoinsConfig.searchModal.showInList}
+                    />
+                  )}
                 </>
               )}
             </div>

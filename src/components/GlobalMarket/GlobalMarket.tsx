@@ -1,11 +1,14 @@
-import { useGetGlobalMarketDataQuery } from "@/store/api/market";
+import Skeleton from "react-loading-skeleton";
+
 import ChangePercentage from "../ChangePercentage/ChangePercentage";
+
+import { useGetGlobalMarketDataQuery } from "@/store/api/market";
 
 import { getLeadingCryptos } from "@/utils/sort";
 import { dominanceCoinsConfig } from "@/config/uiConfig";
 
 const GlobalMarket = () => {
-  const { data } = useGetGlobalMarketDataQuery();
+  const { data, isFetching } = useGetGlobalMarketDataQuery();
 
   const leadingCryptos = getLeadingCryptos(
     dominanceCoinsConfig.showInList,
@@ -14,23 +17,37 @@ const GlobalMarket = () => {
 
   return (
     <ul className="flex flex-wrap gap-x-3 gap-y-1 py-4 text-xs">
-      <li>
-        Coins:{" "}
-        <span className="font-medium text-primary">
-          {data?.active_cryptocurrencies || "No actual data"}
-        </span>
+      <li className="flex items-center gap-x-1">
+        Coins:
+        {isFetching ? (
+          <Skeleton className="h-4 min-w-8" />
+        ) : (
+          <span className="font-medium text-primary">
+            {data?.active_cryptocurrencies || "No actual data"}
+          </span>
+        )}
       </li>
-      <li>
-        Exchanges:{" "}
-        <span className="font-medium text-primary">{data?.markets || "No actual data"}</span>
+      <li className="flex items-center gap-x-1">
+        Exchanges:
+        {isFetching ? (
+          <Skeleton className="h-4 min-w-6" />
+        ) : (
+          <span className="font-medium text-primary">{data?.markets || "No actual data"}</span>
+        )}
       </li>
-      <li className="flex gap-x-1">
+      <li className="flex items-center gap-x-1">
         Market Cap:
-        <ChangePercentage percentage={data?.market_cap_change_percentage_24h_usd || 0} />
+        {isFetching ? (
+          <Skeleton className="h-4 min-w-10" />
+        ) : (
+          <ChangePercentage percentage={data?.market_cap_change_percentage_24h_usd || 0} />
+        )}
       </li>
       <li className="flex items-center gap-x-1">
         Dominance:
-        {leadingCryptos.length > 0 ? (
+        {isFetching ? (
+          <Skeleton className="h-4 min-w-12" />
+        ) : leadingCryptos.length > 0 ? (
           leadingCryptos.map((coin) => {
             return (
               <p key={`${coin.name}`} className="flex gap-x-1">
