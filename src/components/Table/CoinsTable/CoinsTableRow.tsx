@@ -57,7 +57,7 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
                 ? formatCurrency({ number: coin.market_cap })
                 : MESSAGES.EMPTY_TABLE_VALUE}
             </td>
-            <td className="h-18">
+            <td>
               {coin?.sparkline_in_7d?.price.length > 0 ? (
                 <SparklineChart
                   data={coin.sparkline_in_7d.price}

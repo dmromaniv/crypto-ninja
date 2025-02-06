@@ -26,7 +26,8 @@ const CoinsSection = () => {
     currency: currencyConfig.USD.code,
     page,
     perPage: itemsPerPage,
-    category: searchParams.get(queryParamsKeys.category) || undefined,
+    category: searchParams.get(queryParamsKeys.category) ?? undefined,
+    order: searchParams.get(queryParamsKeys.order) ?? undefined,
   });
   const { data: categories } = useGetCategoriesQuery();
 

@@ -7,4 +7,5 @@ export const queryParamsKeys = {
   page: "page",
   itemsPerPage: "per_page",
   category: "category",
+  order: "order",
 };

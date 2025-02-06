@@ -68,9 +68,10 @@ const CoinCard = ({ coin }: CoinCardProps) => {
             </p>
           </div>
         </div>
-        <div className="h-24 w-full min-[500px]:w-1/2">
+        <div className="w-full min-[500px]:w-1/2">
           {coin?.sparkline_in_7d.price ? (
             <SparklineChart
+              height={96}
               data={coin.sparkline_in_7d.price}
               variant={coin?.price_change_percentage_7d_in_currency > 0 ? "success" : "destructive"}
             />
