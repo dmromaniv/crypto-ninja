@@ -1,15 +1,17 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 
-import { getItemFromLocalStorage, setItemToLocalStorage } from "@/services/localStorage";
+import { setItemToLocalStorage } from "@/services/localStorage";
 
 import LOCAL_STORAGE_KEYS from "@/constants/localStorage";
+import { useAppDispatch, useAppSelector } from "./useStore";
+
+import { setTheme, toggleTheme } from "@/store/slices/theme";
 
 export type Theme = "light" | "dark";
 
 export function useTheme() {
-  const [theme, setTheme] = useState(
-    getItemFromLocalStorage<Theme>(LOCAL_STORAGE_KEYS.theme, "light")
-  );
+  const dispatch = useAppDispatch();
+  const theme = useAppSelector((state) => state.themeMode.theme);
 
   useLayoutEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -17,9 +19,12 @@ export function useTheme() {
     setItemToLocalStorage(LOCAL_STORAGE_KEYS.theme, theme);
   }, [theme]);
 
-  const onThemeToggle = () => {
-    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
-  };
+  const onThemeSet = (newTheme: "light" | "dark") => dispatch(setTheme(newTheme));
+  const onThemeToggle = () => dispatch(toggleTheme());
 
-  return { theme, onThemeToggle };
+  return {
+    theme,
+    onThemeSet,
+    onThemeToggle,
+  };
 }

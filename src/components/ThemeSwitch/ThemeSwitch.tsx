@@ -16,9 +16,9 @@ const ThemeSwitch = () => {
         className="text-primary transition duration-300 hover:text-fg dark:text-warm dark:hover:text-fg-dark"
       >
         {theme === "dark" ? (
-          <MoonIcon width={12} height={12} />
-        ) : (
           <SunIcon width={16} height={16} />
+        ) : (
+          <MoonIcon width={12} height={12} />
         )}
       </IconButton>
     </Tooltip>

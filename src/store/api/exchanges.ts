@@ -1,4 +1,4 @@
-import { baseApi } from "./api";
+import { baseApi } from "./base";
 
 import type { Exchange, ExchangeQueryParams } from "@/types/exchange";
 

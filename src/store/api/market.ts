@@ -1,5 +1,6 @@
-import { GlobalMarket } from "@/types/market";
-import { baseApi } from "./api";
+import { baseApi } from "./base";
+
+import type { GlobalMarket } from "@/types/market";
 
 export const marketApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
