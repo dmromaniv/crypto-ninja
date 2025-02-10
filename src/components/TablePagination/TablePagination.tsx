@@ -7,7 +7,7 @@ import { usePagination } from "@/hooks/usePagination";
 
 import { perPageSelectOptions } from "@/config/uiConfig";
 
-const CoinsPagination = () => {
+const TablePagination = () => {
   const { page, itemsPerPage, onPageChange, onItemsPerPageSelect } = usePagination();
   const [selectedValue, setSelectedValue] = useState<SelectValue>(
     perPageSelectOptions.find((item) => item.value === itemsPerPage.toString()) ??
@@ -20,7 +20,7 @@ const CoinsPagination = () => {
   };
 
   return (
-    <div className="relative flex w-full items-center justify-center">
+    <div className="relative flex w-full items-center justify-start min-[450px]:justify-center">
       <Pagination currentPage={page} onPageChange={onPageChange} />
 
       <div className="absolute right-0 flex items-center gap-x-2">
@@ -37,4 +37,4 @@ const CoinsPagination = () => {
   );
 };
 
-export default CoinsPagination;
+export default TablePagination;

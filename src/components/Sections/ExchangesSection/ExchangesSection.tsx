@@ -1,10 +1,8 @@
-import CoinsPagination from "@/components/CoinsPagination";
-
+import TablePagination from "@/components/TablePagination";
 import ExchangesTableSkeleton from "@/components/Table/ExchangesTable/ExchangesTableSkeleton";
 import ExchangesTable from "@/components/Table/ExchangesTable";
 import ExchangesList from "@/components/CardsList/ExchangesList";
 import CardsListSkeleton from "@/components/CardsList/CardsListSkeleton";
-
 const exchanges = [
   {
     id: "binance",
@@ -57,7 +55,7 @@ const ExchangesSection = () => {
       </div>
 
       <div className="mt-8">
-        <CoinsPagination />
+        <TablePagination />
       </div>
     </section>
   );

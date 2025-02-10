@@ -4,7 +4,7 @@ import CoinsList from "@/components/CardsList/CoinsList/CoinsList";
 
 import CoinsTable from "@/components/Table/CoinsTable";
 import CategoryFilter from "@/components/CategoryFilter/CategoryFilter";
-import CoinsPagination from "@/components/CoinsPagination";
+import TablePagination from "@/components/TablePagination";
 import CoinsTableSkeleton from "@/components/Table/CoinsTable/CoinsTableSkeleton";
 import CardsListSkeleton from "@/components/CardsList/CardsListSkeleton";
 
@@ -39,7 +39,7 @@ const CoinsSection = () => {
       </div>
 
       <div className="mt-8">
-        <CoinsPagination />
+        <TablePagination />
       </div>
     </section>
   );
