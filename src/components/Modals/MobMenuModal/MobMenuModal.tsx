@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import Modal from "../Modal";
 import IconButton from "@/components/IconButton";
 import Button from "@/components/Button";
@@ -32,9 +34,16 @@ const MobMenuModal = () => {
               {navigation.map((link, index) => {
                 return (
                   <li key={`${link.name}-${index}`}>
-                    <a className="link-underscore font-medium" href="#">
+                    <NavLink
+                      className={({ isActive }) => {
+                        return isActive
+                          ? "font-medium text-primary"
+                          : "link-underscore font-medium";
+                      }}
+                      to={link.path}
+                    >
                       {link.name}
-                    </a>
+                    </NavLink>
                   </li>
                 );
               })}

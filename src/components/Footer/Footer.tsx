@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import LogoIcon from "@/assets/icons/LogoIcon";
 
 const Footer = () => {
@@ -6,10 +8,9 @@ const Footer = () => {
       <div className="container mx-auto max-w-[1300px] px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-start gap-y-6 md:flex-row md:justify-between">
           <div className="flex w-full items-start justify-start gap-x-5 md:items-center">
-            <a href="#">
-              <span className="sr-only">Home</span>
+            <Link to="/">
               <LogoIcon width={80} height={80} />
-            </a>
+            </Link>
 
             <div className="flex flex-grow flex-col gap-y-6 md:flex-row md:justify-between">
               <p className="text-lg font-bold text-accent-fg dark:text-fg-dark">
