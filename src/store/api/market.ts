@@ -18,11 +18,6 @@ export const marketApi = baseApi.injectEndpoints({
         };
       },
     }),
-    // getMarkets: build.query<any, void>({
-    //   query: () => {
-    //     return `/exchanges`;
-    //   },
-    // }),
   }),
 });
 
