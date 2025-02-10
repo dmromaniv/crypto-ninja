@@ -5,6 +5,7 @@ export const MESSAGES = {
   EMPTY_TABLE_VALUE: "-",
   EMPTY_CARD_VALUE: "-",
   NO_COINS: "No available coins",
+  NO_EXCHANGES: "No available exchanges",
   NO_FOUND: "No results found",
 };
 

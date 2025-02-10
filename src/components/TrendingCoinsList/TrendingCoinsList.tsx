@@ -1,5 +1,5 @@
 import ChangePercentage from "@/components/ChangePercentage";
-import CoinPlaceholder from "@/assets/icons/CoinPlaceholder";
+import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
 import { formatCurrency } from "@/utils/format";
 
@@ -33,7 +33,7 @@ const TrendingCoinsList = ({ coins, count = coins.length }: TrendingCoinsListPro
                   alt={`${coin.name} thumb`}
                 />
               ) : (
-                <CoinPlaceholder width={30} height={30} />
+                <PlaceholderIcon width={30} height={30} />
               )}
 
               <p className="line-clamp-1 font-medium">{coin?.name || MESSAGES.NO_DATA}</p>

@@ -1,12 +1,12 @@
 import { useSearchParams } from "react-router-dom";
 
-import CoinsList from "@/components/CoinsList/CoinsList";
+import CoinsList from "@/components/CardsList/CoinsList/CoinsList";
 
 import CoinsTable from "@/components/Table/CoinsTable";
 import CategoryFilter from "@/components/CategoryFilter/CategoryFilter";
 import CoinsPagination from "@/components/CoinsPagination";
 import CoinsTableSkeleton from "@/components/Table/CoinsTable/CoinsTableSkeleton";
-import CoinsListSkeleton from "@/components/CoinsList/CoinsListSkeleton";
+import CardsListSkeleton from "@/components/CardsList/CardsListSkeleton";
 
 import { usePagination } from "@/hooks/usePagination";
 import { useGetCoinsQuery } from "@/store/api/coins";
@@ -35,7 +35,7 @@ const CoinsSection = () => {
         {isCoinsFetching ? <CoinsTableSkeleton /> : <CoinsTable coins={coins || []} />}
       </div>
       <div className="lg:hidden">
-        {isCoinsFetching ? <CoinsListSkeleton /> : <CoinsList coins={coins || []} />}
+        {isCoinsFetching ? <CardsListSkeleton /> : <CoinsList coins={coins || []} />}
       </div>
 
       <div className="mt-8">

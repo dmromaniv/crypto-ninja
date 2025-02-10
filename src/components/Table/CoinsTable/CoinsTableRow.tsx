@@ -1,6 +1,7 @@
 import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 import SparklineChart from "@/components/Charts/SparklineChart/SparklineChart";
-import CoinPlaceholder from "@/assets/icons/CoinPlaceholder";
+
+import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
 import { formatCurrency } from "@/utils/format";
 
@@ -24,7 +25,7 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
                 {coin?.image ? (
                   <img src={coin?.image} width={24} height={24} alt={`${coin?.name} icon`} />
                 ) : (
-                  <CoinPlaceholder />
+                  <PlaceholderIcon />
                 )}
 
                 <p>
