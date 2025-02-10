@@ -1,9 +1,9 @@
-interface CoinPlaceholderProps {
+interface PlaceholderProps {
   width?: number;
   height?: number;
 }
 
-const CoinPlaceholder = ({ width = 24, height = 24 }: CoinPlaceholderProps) => {
+const PlaceholderIcon = ({ width = 24, height = 24 }: PlaceholderProps) => {
   return (
     <svg width={width} height={height} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <circle cx="50" cy="50" r="50" fill="#2D2D2D" />
@@ -17,4 +17,4 @@ const CoinPlaceholder = ({ width = 24, height = 24 }: CoinPlaceholderProps) => {
   );
 };
 
-export default CoinPlaceholder;
+export default PlaceholderIcon;

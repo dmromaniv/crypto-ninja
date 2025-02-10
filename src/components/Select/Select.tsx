@@ -1,52 +1,80 @@
 import { useState, useEffect, useRef, ChangeEvent, useMemo } from "react";
 import clsx from "clsx";
 
+import SelectSkeleton from "./SelectSkeleton";
+
 import ArrowIcon from "@/assets/icons/ArrowIcon";
 import TickIcon from "@/assets/icons/TickIcon";
 
-interface Option {
+import { MESSAGES } from "@/constants/messages";
+
+export interface Option {
   value: string;
   label: string;
 }
 
+export type SelectValue = Option | Option[];
+
 interface SelectProps {
   options: Option[];
-  multiple?: boolean;
+  selectedValue: SelectValue;
+  closeOnSelect?: boolean;
   searchable?: boolean;
   placeholder?: string;
   menuPosition?: "top" | "bottom";
-  defaultValue?: string[];
-  onChange: (selected: string[] | string) => void;
+  isOptionsLoading?: boolean;
+  onChange: (selected: SelectValue) => void;
 }
 
 const Select = ({
   options,
-  multiple = false,
+  selectedValue,
+  closeOnSelect = false,
   searchable = false,
   placeholder = "Select an option...",
   menuPosition = "bottom",
-  defaultValue,
+  isOptionsLoading,
   onChange,
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selected, setSelected] = useState<string[]>(defaultValue || []);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const onSelect = (value: string) => {
-    let newSelected: string[];
+  const isOptionSelected = (option: Option) => {
+    if (Array.isArray(selectedValue)) {
+      return selectedValue.some((item) => item.value === option.value);
+    }
+    return selectedValue?.value === option.value;
+  };
 
-    if (multiple) {
-      newSelected = selected.includes(value)
-        ? selected.filter((item) => item !== value)
-        : [...selected, value];
+  const getSelectedLabel = () => {
+    if (Array.isArray(selectedValue)) {
+      const labels = selectedValue
+        .map((opt) => opt?.label)
+        .filter(Boolean)
+        .join(", ");
+      return labels || placeholder;
+    }
+    return selectedValue?.label || placeholder;
+  };
+
+  const onSelect = (option: Option) => {
+    let newSelected: SelectValue;
+
+    if (Array.isArray(selectedValue)) {
+      const isSelected = isOptionSelected(option);
+
+      newSelected = isSelected
+        ? selectedValue.filter((item) => item.value !== option.value)
+        : [...selectedValue, option];
     } else {
-      newSelected = selected.includes(value) ? [] : [value];
+      newSelected = isOptionSelected(option) ? { value: "", label: "" } : option;
     }
 
-    setSelected(newSelected);
-    onChange(multiple ? newSelected : newSelected[0] || []);
-    if (!multiple) setIsOpen(false);
+    onChange(newSelected);
+
+    if (!closeOnSelect) setIsOpen(false);
   };
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -56,17 +84,6 @@ const Select = ({
   const onButtonClick = () => {
     setIsOpen((prev) => !prev);
   };
-
-  const filteredOptions = useMemo(() => {
-    return options.filter((option) =>
-      option.label.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [searchQuery, options]);
-
-  const optionsMap = useMemo(
-    () => new Map(options.map((opt) => [opt.value, opt.label])),
-    [options]
-  );
 
   useEffect(() => {
     const onClickOutsideSelect = (event: MouseEvent) => {
@@ -78,17 +95,19 @@ const Select = ({
     return () => document.removeEventListener("click", onClickOutsideSelect);
   }, []);
 
+  const filteredOptions = useMemo(() => {
+    return options.filter((option) =>
+      option.label.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery, options]);
+
   return (
     <div className="relative w-full" ref={dropdownRef}>
       <button
         className="flex w-full cursor-pointer items-center justify-between rounded-md border border-input bg-accent px-2 py-1 shadow-sm transition-opacity hover:bg-accent/70 dark:border-border-dark dark:bg-input-dark hover:dark:bg-input-dark/70"
         onClick={onButtonClick}
       >
-        <span className="truncate">
-          {selected.length > 0
-            ? selected.map((val) => optionsMap.get(val)).join(", ")
-            : placeholder}
-        </span>
+        <span className="truncate">{getSelectedLabel()}</span>
 
         <ArrowIcon width={12} height={12} arrowDirection="down" />
       </button>
@@ -113,31 +132,37 @@ const Select = ({
             </div>
           )}
 
-          <ul className="scrollbar-thin max-h-60 overflow-y-auto">
-            {filteredOptions.length > 0 ? (
-              filteredOptions.map((option) => (
-                <li
-                  key={option.value}
-                  className={clsx(
-                    "flex cursor-pointer items-center justify-between p-3 text-start hover:bg-accent dark:hover:bg-hover-dark",
-                    selected.includes(option.value) && "bg-accent dark:bg-hover-dark"
-                  )}
-                  onClick={() => onSelect(option.value)}
-                >
-                  <span>{option.label}</span>
-                  {selected.includes(option.value) && (
-                    <span className="min-h-4 min-w-4">
-                      <TickIcon width={16} height={16} />
-                    </span>
-                  )}
+          {isOptionsLoading ? (
+            <SelectSkeleton />
+          ) : (
+            <ul className="scrollbar-thin max-h-60 overflow-y-auto">
+              {filteredOptions.length > 0 ? (
+                filteredOptions.map((option) => (
+                  <li
+                    key={option.value}
+                    className={clsx(
+                      "flex cursor-pointer items-center justify-between p-3 text-start hover:bg-accent dark:hover:bg-hover-dark",
+                      isOptionSelected(option) && "bg-accent dark:bg-hover-dark"
+                    )}
+                    onClick={() => onSelect({ value: option.value, label: option.label })}
+                  >
+                    <span>{option.label}</span>
+                    {isOptionSelected(option) && (
+                      <span className="min-h-4 min-w-4">
+                        <TickIcon width={16} height={16} />
+                      </span>
+                    )}
+                  </li>
+                ))
+              ) : (
+                <li>
+                  <p className="p-3 text-start text-sm text-muted-fg dark:text-muted-fg-dark">
+                    {MESSAGES.NO_FOUND}
+                  </p>
                 </li>
-              ))
-            ) : (
-              <p className="p-3 text-start text-sm text-muted-fg dark:text-muted-fg-dark">
-                No results found
-              </p>
-            )}
-          </ul>
+              )}
+            </ul>
+          )}
         </div>
       )}
     </div>

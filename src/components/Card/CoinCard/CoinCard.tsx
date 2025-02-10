@@ -3,6 +3,7 @@ import SparklineChart from "@/components/Charts/SparklineChart";
 import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 
 import ArrowIcon from "@/assets/icons/ArrowIcon";
+import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
 import { formatCurrency } from "@/utils/format";
 
@@ -19,7 +20,12 @@ const CoinCard = ({ coin }: CoinCardProps) => {
     <Card>
       <div className="mb-6 flex justify-between">
         <p className="flex items-center gap-x-2 text-lg font-medium">
-          <img src={coin.image} width={30} height={30} alt={`${coin.name} icon`} />
+          {coin?.image ? (
+            <img src={coin.image} width={30} height={30} alt={`${coin.name} icon`} />
+          ) : (
+            <PlaceholderIcon width={30} height={30} />
+          )}
+
           {coin.name}
         </p>
         <a
@@ -68,9 +74,10 @@ const CoinCard = ({ coin }: CoinCardProps) => {
             </p>
           </div>
         </div>
-        <div className="h-24 w-full min-[500px]:w-1/2">
+        <div className="w-full min-[500px]:w-1/2">
           {coin?.sparkline_in_7d.price ? (
             <SparklineChart
+              height={96}
               data={coin.sparkline_in_7d.price}
               variant={coin?.price_change_percentage_7d_in_currency > 0 ? "success" : "destructive"}
             />

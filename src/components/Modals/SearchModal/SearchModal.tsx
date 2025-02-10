@@ -7,24 +7,33 @@ import Tooltip from "@/components/Tooltip/Tooltip";
 import TrendingCoinsList from "@/components/TrendingCoinsList/TrendingCoinsList";
 import TrendingCoinsListSkeleton from "@/components/TrendingCoinsList/TrendingCoinsListSkeleton";
 
-import useModal from "@/hooks/useModal";
-
 import { useGetTrendingCryptoQuery, useLazyGetDataViaSearchQuery } from "@/store/api/coins";
 import { useDebounce } from "@/hooks/useDebounce";
+import useModal from "@/hooks/useModal";
 
 import { trendingCoinsConfig } from "@/config/uiConfig";
 
+import { MESSAGES } from "@/constants/messages";
+
 const SearchModal = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const { isModalOpen, onModalOpen, onModalClose } = useModal();
-  const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-  const [searchCoins, { data: searchedCoins }] = useLazyGetDataViaSearchQuery();
+  const { isModalOpen, onModalOpen, onModalClose } = useModal();
+  const debouncedSearchQuery = useDebounce(searchQuery, 2000);
+
   const { data: trendingData, isFetching: isFetchingTrendingCoins } = useGetTrendingCryptoQuery();
+  const [searchCoins, { data: searchedCoins, isFetching: isFetchingCoins }] =
+    useLazyGetDataViaSearchQuery();
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value.trimStart());
   };
+
+  useEffect(() => {
+    if (debouncedSearchQuery) {
+      searchCoins(debouncedSearchQuery, true);
+    }
+  }, [debouncedSearchQuery, searchCoins]);
 
   const onKeyPress = useCallback(
     (event: KeyboardEvent) => {
@@ -37,18 +46,13 @@ const SearchModal = () => {
   );
 
   useEffect(() => {
-    if (debouncedSearchQuery) {
-      searchCoins(debouncedSearchQuery);
-    }
-  }, [debouncedSearchQuery, searchCoins]);
-
-  useEffect(() => {
     window.addEventListener("keydown", onKeyPress);
     return () => {
       window.removeEventListener("keydown", onKeyPress);
     };
   }, [onKeyPress]);
 
+  const isLoading = isFetchingTrendingCoins || isFetchingCoins;
   return (
     <>
       <div className="h-[38px]" onClick={onModalOpen}>
@@ -71,7 +75,7 @@ const SearchModal = () => {
             onModalClose();
           }}
         >
-          <div className="flex max-h-[60vh] w-[90vw] max-w-[600px] flex-col gap-y-6 rounded-md md:w-[80vw] lg:w-[60vw] xl:w-[50vw]">
+          <div className="flex h-[60vh] w-[90vw] max-w-[600px] flex-col gap-y-6 rounded-md md:w-[80vw] lg:w-[60vw] xl:w-[50vw]">
             <input
               type="text"
               autoFocus
@@ -82,44 +86,51 @@ const SearchModal = () => {
               )}
               onChange={onInputChange}
             />
+
             <div className="scrollbar-thin h-full overflow-y-auto">
-              {!!searchedCoins?.length && searchQuery ? (
-                <ul>
-                  {searchedCoins?.map((coin) => {
-                    return (
-                      <li
-                        key={coin.id}
-                        className="flex min-h-14 cursor-pointer items-center gap-x-6 rounded-md p-2 hover:bg-accent/80"
-                      >
-                        <div className="flex flex-1 items-center gap-x-10">
-                          <img
-                            className="min-h-[30px] min-w-[30px] overflow-hidden rounded-full"
-                            width={30}
-                            height={30}
-                            src={coin.thumb}
-                            alt={`${coin.name} thumb`}
-                          />
-                          <p className="line-clamp-1 font-medium">
-                            {coin.name}
-                            <span className="pl-3 text-xs text-accent-fg/60">{coin.symbol}</span>
-                          </p>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              ) : (
+              {isLoading && (
+                <TrendingCoinsListSkeleton count={trendingCoinsConfig.searchModal.showInList} />
+              )}
+
+              {!isLoading && !searchQuery && (
                 <>
                   <p className="mb-1">Trending coins</p>
-                  {isFetchingTrendingCoins ? (
-                    <TrendingCoinsListSkeleton count={trendingCoinsConfig.searchModal.showInList} />
-                  ) : (
-                    <TrendingCoinsList
-                      coins={trendingData?.coins || []}
-                      count={trendingCoinsConfig.searchModal.showInList}
-                    />
-                  )}
+                  <TrendingCoinsList
+                    coins={trendingData?.coins || []}
+                    count={trendingCoinsConfig.searchModal.showInList}
+                  />
                 </>
+              )}
+
+              {!isLoading && searchQuery && searchedCoins && (
+                <ul>
+                  {searchedCoins?.length > 0 ? (
+                    searchedCoins.map((coin) => {
+                      return (
+                        <li
+                          key={coin.id}
+                          className="flex min-h-14 cursor-pointer items-center gap-x-6 rounded-md p-2 hover:bg-accent/80"
+                        >
+                          <div className="flex flex-1 items-center gap-x-10">
+                            <img
+                              className="min-h-[30px] min-w-[30px] overflow-hidden rounded-full"
+                              width={30}
+                              height={30}
+                              src={coin.thumb}
+                              alt={`${coin.name} thumb`}
+                            />
+                            <p className="line-clamp-1 font-medium">
+                              {coin.name}
+                              <span className="pl-3 text-xs text-accent-fg/60">{coin.symbol}</span>
+                            </p>
+                          </div>
+                        </li>
+                      );
+                    })
+                  ) : (
+                    <li>{MESSAGES.NO_FOUND}</li>
+                  )}
+                </ul>
               )}
             </div>
           </div>
