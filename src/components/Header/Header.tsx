@@ -1,3 +1,5 @@
+import { Link, NavLink } from "react-router-dom";
+
 import AuthButtons from "../AuthButtons";
 import Language from "@components/Language";
 import ThemeSwitch from "@components/ThemeSwitch";
@@ -11,10 +13,9 @@ const Header = () => {
   return (
     <header className="border-b border-b-border/40 bg-light dark:border-b-border-dark dark:bg-accent-dark">
       <div className="container mx-auto flex h-20 max-w-[1300px] items-center gap-8 px-4 sm:px-6 lg:px-8">
-        <a href="#">
-          <span className="sr-only">Home</span>
+        <Link to="/">
           <Logo />
-        </a>
+        </Link>
 
         <div className="flex flex-1 items-center justify-end md:justify-between">
           <nav aria-label="Global" className="hidden md:block">
@@ -22,9 +23,16 @@ const Header = () => {
               {navigation.map((link, index) => {
                 return (
                   <li key={`${link.name}-${index}`}>
-                    <a className="link-underscore font-medium" href="#">
+                    <NavLink
+                      className={({ isActive }) => {
+                        return isActive
+                          ? "font-medium text-primary"
+                          : "link-underscore font-medium";
+                      }}
+                      to={link.path}
+                    >
                       {link.name}
-                    </a>
+                    </NavLink>
                   </li>
                 );
               })}
