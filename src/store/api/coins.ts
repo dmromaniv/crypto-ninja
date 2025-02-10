@@ -92,4 +92,5 @@ export const {
   useGetCategoriesQuery,
   useGetTrendingCryptoQuery,
   useLazyGetDataViaSearchQuery,
+  useGetDataViaSearchQuery,
 } = coinsApi;

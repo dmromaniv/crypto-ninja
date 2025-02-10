@@ -5,15 +5,7 @@ interface TrendingCoinsListSkeletonProps {
 }
 
 const TrendingCoinsListSkeleton = ({ count }: TrendingCoinsListSkeletonProps) => {
-  return (
-    <ul>
-      {Array.from({ length: count }).map((_, index) => (
-        <li key={index}>
-          <Skeleton borderRadius={"0.375rem"} className="h-14 w-full" />
-        </li>
-      ))}
-    </ul>
-  );
+  return <Skeleton borderRadius={"0.375rem"} className="h-14 w-full" count={count} />;
 };
 
 export default TrendingCoinsListSkeleton;

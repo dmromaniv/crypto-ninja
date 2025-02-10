@@ -1,9 +1,10 @@
 interface CloseIconProps {
   width?: number;
   height?: number;
+  strokeWidth?: number;
 }
 
-const CloseIcon = ({ width = 24, height = 24 }: CloseIconProps) => {
+const CloseIcon = ({ width = 24, height = 24, strokeWidth = 2 }: CloseIconProps) => {
   return (
     <svg
       width={width}
@@ -22,7 +23,7 @@ const CloseIcon = ({ width = 24, height = 24 }: CloseIconProps) => {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeMiterlimit="10"
-        strokeWidth="2"
+        strokeWidth={strokeWidth}
       />
       <line
         x1="54.5"
@@ -34,7 +35,7 @@ const CloseIcon = ({ width = 24, height = 24 }: CloseIconProps) => {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeMiterlimit="10"
-        strokeWidth="2"
+        strokeWidth={strokeWidth}
       />
     </svg>
   );

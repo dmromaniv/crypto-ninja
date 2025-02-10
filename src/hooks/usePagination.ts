@@ -4,8 +4,10 @@ import { useSearchParams } from "react-router-dom";
 import { getItemFromLocalStorage, setItemToLocalStorage } from "@/services/localStorage";
 import { updateSearchParams } from "@/utils/searchParams";
 
-import { queryParamsKeys } from "@/config/apiConfig";
+import { searchParamsKeys } from "@/config/apiConfig";
 import LOCAL_STORAGE_KEYS from "@/constants/localStorage";
+
+import type { SelectValue } from "@/components/Select/Select";
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_PER_PAGE = 100;
@@ -18,8 +20,9 @@ export const usePagination = () => {
     DEFAULT_PER_PAGE
   );
 
-  const page = Number(searchParams.get(queryParamsKeys.page)) || DEFAULT_PAGE;
-  const itemsPerPage = Number(searchParams.get(queryParamsKeys.itemsPerPage)) || storedItemsPerPage;
+  const page = Number(searchParams.get(searchParamsKeys.page)) || DEFAULT_PAGE;
+  const itemsPerPage =
+    Number(searchParams.get(searchParamsKeys.itemsPerPage)) || storedItemsPerPage;
 
   useEffect(() => {
     if (itemsPerPage !== storedItemsPerPage) {
@@ -30,7 +33,7 @@ export const usePagination = () => {
   const setPage = (newPage: number) => {
     if (newPage > 0) {
       const params = updateSearchParams(searchParams, {
-        key: queryParamsKeys.page,
+        key: searchParamsKeys.page,
         value: newPage,
       });
       setSearchParams(params);
@@ -39,7 +42,7 @@ export const usePagination = () => {
 
   const setItemsPerPage = (newItemsPerPage: string) => {
     const params = updateSearchParams(searchParams, {
-      key: queryParamsKeys.itemsPerPage,
+      key: searchParamsKeys.itemsPerPage,
       value: newItemsPerPage,
     });
     setSearchParams(params);
@@ -53,9 +56,9 @@ export const usePagination = () => {
     setPage(page + 1);
   };
 
-  const onItemsPerPageSelect = (itemsPerPage: string | string[]) => {
-    if (typeof itemsPerPage === "string") {
-      setItemsPerPage(itemsPerPage);
+  const onItemsPerPageSelect = (itemsPerPage: SelectValue) => {
+    if (!Array.isArray(itemsPerPage)) {
+      setItemsPerPage(itemsPerPage.value);
     }
   };
 
