@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 import { currencyConfig } from "@/config/formatConfig";
 
 interface FormatCurrency {
@@ -20,4 +22,22 @@ export const formatCurrency = ({
     notation,
   });
   return formatter.format(number);
+};
+
+export const formatTimestamp = (timestamp: number, pattern: string): string | null => {
+  // Check if the timestamp is a valid number
+  if (!Number.isFinite(timestamp) || timestamp <= 0) {
+    return null;
+  }
+
+  // Convert timestamp to Date
+  const date = new Date(timestamp);
+
+  // Check if the date is valid
+  if (isNaN(date.getTime())) {
+    return null;
+  }
+
+  // Format the date
+  return format(new Date(timestamp), pattern);
 };

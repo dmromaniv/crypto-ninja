@@ -4,6 +4,7 @@ export const MESSAGES = {
   NO_PROVIDED_CHARTS: "No provided chart",
   EMPTY_TABLE_VALUE: "-",
   EMPTY_CARD_VALUE: "-",
+  EMPTY_VALUE: "*",
   NO_COINS: "No available coins",
   NO_EXCHANGES: "No available exchanges",
   NO_FOUND: "No results found",
