@@ -20,3 +20,22 @@ export const perPageSelectOptions = [
   { label: "50", value: "50" },
   { label: "100", value: "100" },
 ];
+
+export const historicalChartFilters = [
+  {
+    label: "24h",
+    value: 1,
+  },
+  {
+    label: "7d",
+    value: 7,
+  },
+  {
+    label: "1m",
+    value: 30,
+  },
+  {
+    label: "3m",
+    value: 90,
+  },
+];

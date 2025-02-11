@@ -34,6 +34,9 @@
   --color-input: #e5e7eb;
   --color-ring: #7b39ed;
 
+  --color-chart-base: #8884d8;
+  --color-axis: #e5e7eb;
+
   --color-hover: #e5e7eb;
 
   /* Dark Theme #020611*/
@@ -59,6 +62,9 @@
   --color-border-dark: #243041;
   --color-input-dark: #243041;
   --color-ring-dark: #6d27d9;
+
+  --color-chart-base: #8884d8;
+  --color-axis-dark: #243041;
 
   --color-hover-dark: #243041;
 

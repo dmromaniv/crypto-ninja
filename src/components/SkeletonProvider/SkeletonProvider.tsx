@@ -1,18 +1,14 @@
 import { ReactNode } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 
-import { getItemFromLocalStorage } from "@/services/localStorage";
-
-import LOCAL_STORAGE_KEYS from "@/constants/localStorage";
-
-import type { Theme } from "@/hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 interface SkeletonProviderProps {
   children: ReactNode;
 }
 
 export const SkeletonProvider = ({ children }: SkeletonProviderProps) => {
-  const theme = getItemFromLocalStorage<Theme>(LOCAL_STORAGE_KEYS.theme, "light");
+  const { theme } = useTheme();
 
   return (
     <SkeletonTheme

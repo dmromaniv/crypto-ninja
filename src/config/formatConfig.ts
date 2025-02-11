@@ -18,3 +18,11 @@ export const currencyConfig = {
     name: "US Dollar",
   },
 };
+
+export const dateTimeConfig = {
+  shortDate: "dd MMM",
+  fullDate: "dd MMMM yyyy",
+
+  shortDateTime: "dd MMMM HH:mm",
+  fullDateTime: "d MMMM yyyy, HH:mm",
+};

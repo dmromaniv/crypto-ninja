@@ -1,5 +1,5 @@
 import { defaultCoinsQueryParams } from "@/config/apiConfig";
-import { baseApi } from "./api";
+import { baseApi } from "./base";
 
 import type { Coin, CoinCategory, CoinQueryParams, SearchedCoin, TrendingData } from "@/types/coin";
 
