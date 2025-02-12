@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import HistoricalChartFilter from "@/components/HistoricalChartFilter";
 import HistoricalChart from "@/components/Charts/HistoricalChart";
+import HistoricalChartSkeleton from "@/components/Charts/HistoricalChart/HistoricalChartSkeleton";
 
 import { historicalChartFilters } from "@/config/uiConfig";
 import { useGetHistoricalCoinDataByIdQuery } from "@/store/api/coins";
@@ -18,13 +19,15 @@ const CoinChartsSection = () => {
     setDaysRange(days);
   };
 
-  const { data } = useGetHistoricalCoinDataByIdQuery({
+  const { data, isLoading } = useGetHistoricalCoinDataByIdQuery({
     currency: currencyConfig.USD.code,
     days: daysRange,
     id: id as string,
   });
 
-  return (
+  return isLoading ? (
+    <HistoricalChartSkeleton />
+  ) : (
     data && (
       <section>
         <div className="flex flex-col gap-y-8">
@@ -34,11 +37,12 @@ const CoinChartsSection = () => {
               <HistoricalChartFilter onFilterSet={onFilterSet} currentFilterValue={daysRange} />
             </div>
 
-            <HistoricalChart historicalData={data?.prices || []} />
+            <HistoricalChart historicalData={data.prices || []} />
           </div>
           <div>
             <h2 className="mb-4 text-lg">Market capitalization</h2>
-            <HistoricalChart historicalData={data?.market_caps || []} />
+
+            <HistoricalChart historicalData={data.market_caps || []} />
           </div>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 
+import Skeleton from "react-loading-skeleton";
 import ChangePercentage from "../ChangePercentage";
 import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
@@ -11,9 +12,11 @@ import { MESSAGES } from "@/constants/messages";
 
 const CoinInfo = () => {
   const { id } = useParams();
-  const { data: coin } = useGetCoinByIdQuery(id as string);
+  const { data: coin, isLoading } = useGetCoinByIdQuery(id as string);
 
-  return coin?.id ? (
+  return isLoading ? (
+    <Skeleton className="min-h-40" />
+  ) : coin?.id ? (
     <div className="flex flex-col gap-y-3">
       <div className="flex flex-wrap items-center gap-x-2 text-2xl">
         {coin?.thumb ? <img src={coin.thumb} alt={`${coin.name} logo`} /> : <PlaceholderIcon />}
@@ -23,7 +26,8 @@ const CoinInfo = () => {
       </div>
 
       <p className="flex items-center gap-x-2 text-xl font-medium">
-        {coin?.current_price?.["usd"] && formatCurrency({ number: coin.current_price["usd"] })}
+        {coin?.current_price?.["usd"] &&
+          formatCurrency({ number: coin.current_price["usd"], notation: "compact" })}
 
         {coin?.price_change_percentage_24h_in_currency?.["usd"] && (
           <p className="flex gap-x-1">

@@ -20,9 +20,14 @@ type HistoricalData = [number, number];
 interface CoinPricesChartProps {
   historicalData: HistoricalData[];
   chartStroke?: string;
+  height?: number;
 }
 
-const HistoricalChart = ({ historicalData, chartStroke = "#8884d8" }: CoinPricesChartProps) => {
+const HistoricalChart = ({
+  historicalData,
+  chartStroke = "#8884d8",
+  height = 300,
+}: CoinPricesChartProps) => {
   const formattedData = useMemo(() => {
     return historicalData.map((data: HistoricalData) => ({
       timestamp: data[0],
@@ -33,7 +38,7 @@ const HistoricalChart = ({ historicalData, chartStroke = "#8884d8" }: CoinPrices
   return (
     <div>
       {formattedData.length > 0 ? (
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={height}>
           <AreaChart data={formattedData}>
             <defs>
               <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -53,6 +58,7 @@ const HistoricalChart = ({ historicalData, chartStroke = "#8884d8" }: CoinPrices
               domain={["auto", "auto"]}
               axisLine={false}
               tickLine={false}
+              width={75}
               tick={(props) => <CustomYTick {...props} />}
             />
             <CartesianGrid
