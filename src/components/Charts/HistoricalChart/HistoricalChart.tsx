@@ -58,6 +58,7 @@ const HistoricalChart = ({
               domain={["auto", "auto"]}
               axisLine={false}
               tickLine={false}
+              width={75}
               tick={(props) => <CustomYTick {...props} />}
             />
             <CartesianGrid

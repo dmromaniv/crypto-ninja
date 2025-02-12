@@ -26,7 +26,8 @@ const CoinInfo = () => {
       </div>
 
       <p className="flex items-center gap-x-2 text-xl font-medium">
-        {coin?.current_price?.["usd"] && formatCurrency({ number: coin.current_price["usd"] })}
+        {coin?.current_price?.["usd"] &&
+          formatCurrency({ number: coin.current_price["usd"], notation: "compact" })}
 
         {coin?.price_change_percentage_24h_in_currency?.["usd"] && (
           <p className="flex gap-x-1">

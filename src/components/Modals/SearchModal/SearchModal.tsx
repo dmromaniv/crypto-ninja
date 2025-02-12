@@ -1,5 +1,6 @@
-import clsx from "clsx";
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import clsx from "clsx";
 
 import Input from "@/components/Input";
 import Modal from "../Modal";
@@ -18,12 +19,19 @@ import { MESSAGES } from "@/constants/messages";
 const SearchModal = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
+  const navigate = useNavigate();
+
   const { isModalOpen, onModalOpen, onModalClose } = useModal();
   const debouncedSearchQuery = useDebounce(searchQuery, 2000);
 
   const { data: trendingData, isFetching: isFetchingTrendingCoins } = useGetTrendingCryptoQuery();
   const [searchCoins, { data: searchedCoins, isFetching: isFetchingCoins }] =
     useLazyGetDataViaSearchQuery();
+
+  const onListItemClick = (id: string) => {
+    navigate(`/coins/${id}`);
+    onModalClose();
+  };
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value.trimStart());
@@ -109,7 +117,10 @@ const SearchModal = () => {
                       return (
                         <li
                           key={coin.id}
-                          className="flex min-h-14 cursor-pointer items-center gap-x-6 rounded-md p-2 hover:bg-accent/80"
+                          className="flex min-h-14 cursor-pointer items-center gap-x-6 rounded-md p-2 hover:bg-accent/80 dark:hover:bg-hover-dark"
+                          onClick={() => {
+                            onListItemClick(coin.id);
+                          }}
                         >
                           <div className="flex flex-1 items-center gap-x-10">
                             <img
@@ -121,7 +132,9 @@ const SearchModal = () => {
                             />
                             <p className="line-clamp-1 font-medium">
                               {coin.name}
-                              <span className="pl-3 text-xs text-accent-fg/60">{coin.symbol}</span>
+                              <span className="pl-3 text-xs text-accent-fg/60 dark:text-accent-fg-dark/30">
+                                {coin.symbol}
+                              </span>
                             </p>
                           </div>
                         </li>

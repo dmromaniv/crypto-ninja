@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 import SparklineChart from "@/components/Charts/SparklineChart/SparklineChart";
 
@@ -14,11 +16,22 @@ interface CoinsTableRowProps {
 }
 
 const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
+  const navigate = useNavigate();
+
+  const onRowClick = (id: string) => {
+    navigate(`coins/${id}`);
+  };
+
   return (
     <>
       {coinsData.map((coin) => {
         return (
-          <tr key={coin.id}>
+          <tr
+            key={coin.id}
+            onClick={() => {
+              onRowClick(coin.id);
+            }}
+          >
             <td>{coin?.market_cap_rank || MESSAGES.EMPTY_TABLE_VALUE}</td>
             <td>
               <div className="flex flex-wrap items-center gap-2 font-medium">

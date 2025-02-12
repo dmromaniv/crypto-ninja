@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Card from "../Card";
 import SparklineChart from "@/components/Charts/SparklineChart";
 import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
@@ -28,14 +30,14 @@ const CoinCard = ({ coin }: CoinCardProps) => {
 
           {coin.name}
         </p>
-        <a
-          href="https://www.coingecko.com/en/api"
-          target="_blank"
-          className="flex items-center text-accent-fg/80 transition-colors hover:text-primary hover:underline dark:text-fg-dark hover:dark:text-primary-dark"
+        <Link
+          to={`coins/${coin.id}`}
+          className="flex items-center text-accent-fg/80 transition-colors hover:text-primary dark:text-fg-dark hover:dark:text-primary-dark"
         >
-          View more
+          <span className="link-underscore"> View more</span>
+
           <ArrowIcon width={20} height={20} arrowDirection="right" />
-        </a>
+        </Link>
       </div>
       <div className="min-[500px]:justify-betweens flex flex-col gap-x-1 min-[500px]:flex-row">
         <div className="w-full min-[500px]:w-1/2">

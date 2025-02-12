@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import ChangePercentage from "@/components/ChangePercentage";
 import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
@@ -13,6 +15,12 @@ interface TrendingCoinsListProps {
 }
 
 const TrendingCoinsList = ({ coins, count = coins.length }: TrendingCoinsListProps) => {
+  const navigate = useNavigate();
+
+  const onItemClick = (id: string) => {
+    navigate(`/coins/${id}`);
+  };
+
   const displayCoins = coins.length > count ? coins.slice(0, count) : coins;
 
   return (
@@ -22,6 +30,9 @@ const TrendingCoinsList = ({ coins, count = coins.length }: TrendingCoinsListPro
           <li
             key={coin.coin_id}
             className="flex min-h-14 cursor-pointer items-center justify-between gap-x-6 rounded-md p-2 hover:bg-accent/80 hover:dark:bg-hover-dark"
+            onClick={() => {
+              onItemClick(coin.id);
+            }}
           >
             <div className="flex flex-1 items-center gap-x-2">
               {coin?.thumb ? (
