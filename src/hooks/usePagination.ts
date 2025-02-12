@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { getItemFromLocalStorage, setItemToLocalStorage } from "@/services/localStorage";
-import { updateSearchParams } from "@/utils/searchParams";
+import { updateSearchParams } from "@/utils/handleSearchParams";
 
 import { searchParamsKeys } from "@/config/apiConfig";
 import LOCAL_STORAGE_KEYS from "@/constants/localStorage";

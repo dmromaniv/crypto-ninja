@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { useGetCategoriesQuery } from "@/store/api/coins";
 import useSelectOptions from "@/hooks/useSelectOptions";
 
-import { updateSearchParams } from "@/utils/searchParams";
+import { updateSearchParams } from "@/utils/handleSearchParams";
 
 import { searchParamsKeys } from "@/config/apiConfig";
 
