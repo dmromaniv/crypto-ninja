@@ -15,6 +15,63 @@ interface Sparkline {
   price: number[];
 }
 
+export interface HistoricalData {
+  prices: [number, number][];
+  market_caps: [number, number][];
+}
+
+export interface CoinDetailResponse {
+  id: string;
+  symbol: string;
+  name: string;
+  image: {
+    thumb: string;
+  };
+
+  categories: string[];
+  description: {
+    [x: string]: string;
+  };
+
+  market_data: {
+    current_price: {
+      [x: string]: number;
+    };
+    market_cap: {
+      [x: string]: number;
+    };
+    total_volume: {
+      [x: string]: number;
+    };
+    price_change_percentage_24h_in_currency: {
+      [x: string]: number;
+    };
+  };
+}
+
+export interface CoinDetail {
+  id: string;
+  symbol: string;
+  name: string;
+  thumb: string;
+  current_price: {
+    [x: string]: number;
+  };
+  price_change_percentage_24h_in_currency: {
+    [x: string]: number;
+  };
+  description: {
+    [x: string]: string;
+  };
+  market_cap: {
+    [x: string]: number;
+  };
+  total_volume: {
+    [x: string]: number;
+  };
+  categories: string[];
+}
+
 export interface CoinCategory {
   category_id: string;
   name: string;
@@ -68,4 +125,10 @@ export interface CoinQueryParams {
   perPage?: number;
   page?: number;
   category?: string;
+}
+
+export interface CoinByIdQueryParams {
+  id: string;
+  currency: string;
+  days: number;
 }

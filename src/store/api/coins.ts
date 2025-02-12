@@ -1,7 +1,18 @@
-import { defaultCoinsQueryParams } from "@/config/apiConfig";
 import { baseApi } from "./base";
 
-import type { Coin, CoinCategory, CoinQueryParams, SearchedCoin, TrendingData } from "@/types/coin";
+import { defaultCoinQueryParams, defaultCoinsQueryParams } from "@/config/apiConfig";
+
+import type {
+  Coin,
+  CoinByIdQueryParams,
+  CoinCategory,
+  CoinDetail,
+  CoinDetailResponse,
+  CoinQueryParams,
+  HistoricalData,
+  SearchedCoin,
+  TrendingData,
+} from "@/types/coin";
 
 export const coinsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -32,11 +43,43 @@ export const coinsApi = baseApi.injectEndpoints({
         }));
       },
     }),
-    // getCoinById: build.query<Coin[], CoinQueryParams>({
-    //   query: ({ vs_currency, order, per_page, page }) => {
-    //     return `coins/markets?vs_currency=usd&per_page=50`;
-    //   },
-    // }),
+    getCoinById: build.query<CoinDetail, string>({
+      query: (id) => {
+        return { url: `coins/${id}`, params: defaultCoinQueryParams };
+      },
+      transformResponse: (response: CoinDetailResponse) => {
+        return {
+          id: response.id,
+          symbol: response.symbol,
+          name: response.name,
+          thumb: response.image.thumb,
+          market_cap: response.market_data.market_cap,
+          current_price: response.market_data.current_price,
+          categories: response.categories,
+          price_change_percentage_24h_in_currency:
+            response.market_data.price_change_percentage_24h_in_currency,
+          description: response.description,
+          total_volume: response.market_data.total_volume,
+        };
+      },
+    }),
+    getHistoricalCoinDataById: build.query<HistoricalData, CoinByIdQueryParams>({
+      query: (params) => {
+        return {
+          url: `/coins/${params.id}/market_chart`,
+          params: {
+            vs_currency: params.currency,
+            days: params.days,
+          },
+        };
+      },
+      transformResponse: (response: HistoricalData) => {
+        return {
+          prices: response.prices,
+          market_caps: response.market_caps,
+        };
+      },
+    }),
     getTrendingCrypto: build.query<TrendingData, void>({
       query: () => {
         return `search/trending`;
@@ -93,4 +136,6 @@ export const {
   useGetTrendingCryptoQuery,
   useLazyGetDataViaSearchQuery,
   useGetDataViaSearchQuery,
+  useGetHistoricalCoinDataByIdQuery,
+  useGetCoinByIdQuery,
 } = coinsApi;
