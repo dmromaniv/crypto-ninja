@@ -5,7 +5,8 @@ const HomePage = lazy(() => import("../pages/HomePage"));
 const AboutPage = lazy(() => import("../pages/AboutPage"));
 const ExchangesPage = lazy(() => import("../pages/ExchangesPage"));
 const CoinPage = lazy(() => import("../pages/CoinPage"));
-// const NotFound = lazy(() => import("../pages/NotFound"));
+
+import NotFound from "@/components/NotFound";
 
 const AppRoutes = () => {
   return (
@@ -15,7 +16,7 @@ const AppRoutes = () => {
         <Route path="/coins/:id" element={<CoinPage />} />
         <Route path="/exchanges" element={<ExchangesPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<div>Not found</div>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );
