@@ -1,14 +1,21 @@
 import { isRejectedWithValue, Middleware } from "@reduxjs/toolkit";
+
 import { toast } from "react-toastify";
+
+import { getFriendlyErrorMessage, isFetchBaseQueryError } from "@/utils/handleError";
 
 export const errorMiddleware: Middleware = () => (next) => (action) => {
   if (isRejectedWithValue(action)) {
-    const errorMessage =
-      "data" in action.error
-        ? (action.error.data as { message?: string }).message || "Unknown error"
-        : action.error?.message || "Unexpected error";
+    const error = action.payload;
 
-    toast.error(errorMessage, { theme: "colored" });
+    if (isFetchBaseQueryError(error)) {
+      if (typeof error.status === "number") {
+        toast.error(getFriendlyErrorMessage(error.status), { theme: "colored" });
+      }
+      toast.error("Unexpected error", { theme: "colored" });
+    }
+
+    // TODO: Handle all error types
   }
 
   return next(action);

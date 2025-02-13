@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-import { updateSearchParams } from "@/utils/searchParams";
+import { updateSearchParams } from "@/utils/handleSearchParams";
 
 type OrderOption = Record<string, { asc: string; desc: string }>;
 
