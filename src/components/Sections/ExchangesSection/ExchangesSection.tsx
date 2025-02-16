@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import TablePagination from "@/components/TablePagination";
 import ExchangesTableSkeleton from "@/components/Table/ExchangesTable/ExchangesTableSkeleton";
 import ExchangesTable from "@/components/Table/ExchangesTable";
@@ -8,6 +10,7 @@ import { usePagination } from "@/hooks/usePagination";
 import { useGetExchangesQuery } from "@/store/api/exchanges";
 
 const ExchangesSection = () => {
+  const { t } = useTranslation();
   const { page, itemsPerPage } = usePagination();
 
   const { data: exchanges, isFetching: isExchangesFetching } = useGetExchangesQuery({
@@ -19,9 +22,9 @@ const ExchangesSection = () => {
     <section>
       <div className="mb-8">
         <h1 className="text-xl font-medium text-accent-fg sm:text-3xl dark:text-accent-fg-dark/90">
-          Top Crypto Exchanges
+          {t("exchanges.main_heading")}
         </h1>
-        <p>ranked by Trust Score</p>
+        <h2>{t("exchanges.sub_heading_one")}</h2>
       </div>
 
       <div className="hidden lg:block">

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import CoinCard from "@/components/Card/CoinCard/CoinCard";
 
 import { MESSAGES } from "@/constants/messages";
@@ -9,6 +11,8 @@ interface CoinsListProps {
 }
 
 const CoinsList = ({ coins }: CoinsListProps) => {
+  const { t } = useTranslation();
+
   return coins.length > 0 ? (
     <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {coins.map((coin) => {
@@ -20,7 +24,7 @@ const CoinsList = ({ coins }: CoinsListProps) => {
       })}
     </ul>
   ) : (
-    <p className="text-center">{MESSAGES.NO_COINS}</p>
+    <p className="text-center">{t(MESSAGES.NO_COINS)}</p>
   );
 };
 

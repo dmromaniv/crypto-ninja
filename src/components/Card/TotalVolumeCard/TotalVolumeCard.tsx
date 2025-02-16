@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import Card from "../Card";
 
 import { formatCurrency } from "@/utils/format";
@@ -9,15 +11,17 @@ interface TotalVolumeCardProps {
 }
 
 const TotalVolumeCard = ({ totalVolume }: TotalVolumeCardProps) => {
+  const { t } = useTranslation();
+
   return (
     <Card>
       <div className="mb-5 flex justify-between">
-        <p className="flex items-center gap-x-2 text-lg font-medium">Total volume</p>
+        <p className="flex items-center gap-x-2 text-lg font-medium">{t("labels.total_volume")}</p>
       </div>
       <p className="text-lg font-medium">
         {totalVolume
           ? formatCurrency({ number: totalVolume, notation: "compact" })
-          : MESSAGES.NO_PROVIDED_DATA}
+          : t(MESSAGES.NO_PROVIDED_DATA)}
       </p>
     </Card>
   );

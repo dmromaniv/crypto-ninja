@@ -23,19 +23,23 @@ export const perPageSelectOptions = [
 
 export const historicalChartFilters = [
   {
-    label: "24h",
+    label: "time.in_hours",
     value: 1,
+    interpolationValue: 24,
   },
   {
-    label: "7d",
+    label: "time.in_days",
     value: 7,
+    interpolationValue: 7,
   },
   {
-    label: "1m",
+    label: "time.in_months",
     value: 30,
+    interpolationValue: 1,
   },
   {
-    label: "3m",
+    label: "time.in_months",
     value: 90,
+    interpolationValue: 3,
   },
 ];

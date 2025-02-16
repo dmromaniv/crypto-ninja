@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 import SparklineChart from "@/components/Charts/SparklineChart/SparklineChart";
@@ -17,6 +18,7 @@ interface CoinsTableRowProps {
 
 const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onRowClick = (id: string) => {
     navigate(`coins/${id}`);
@@ -80,7 +82,7 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
                   }
                 />
               ) : (
-                MESSAGES.NO_PROVIDED_CHARTS
+                t(MESSAGES.NO_PROVIDED_CHART)
               )}
             </td>
           </tr>

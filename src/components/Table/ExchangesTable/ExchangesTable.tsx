@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import Table from "../Table";
 import ExchangesTableHead from "./ExchangesTableHead";
 import ExchangesTableRow from "./ExchangesTableRow";
@@ -11,13 +13,15 @@ interface ExchangesTableProps {
 }
 
 const ExchangesTable = ({ exchanges }: ExchangesTableProps) => {
+  const { t } = useTranslation();
+
   return (
     <Table tableHead={<ExchangesTableHead />}>
       {exchanges.length > 0 ? (
         <ExchangesTableRow exchanges={exchanges} />
       ) : (
         <tr className="text-center">
-          <td colSpan={100}>{MESSAGES.NO_EXCHANGES}</td>
+          <td colSpan={100}>{t(MESSAGES.NO_EXCHANGES)}</td>
         </tr>
       )}
     </Table>

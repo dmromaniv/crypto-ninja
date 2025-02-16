@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Card from "../Card";
 import SparklineChart from "@/components/Charts/SparklineChart";
@@ -18,6 +19,8 @@ interface CoinCardProps {
 }
 
 const CoinCard = ({ coin }: CoinCardProps) => {
+  const { t } = useTranslation();
+
   return (
     <Card>
       <div className="mb-6 flex justify-between">
@@ -34,7 +37,7 @@ const CoinCard = ({ coin }: CoinCardProps) => {
           to={`coins/${coin.id}`}
           className="flex items-center text-accent-fg/80 transition-colors hover:text-primary dark:text-fg-dark hover:dark:text-primary-dark"
         >
-          <span className="link-underscore"> View more</span>
+          <span className="link-underscore">{t("links.view_more")}</span>
 
           <ArrowIcon width={20} height={20} arrowDirection="right" />
         </Link>
@@ -42,32 +45,32 @@ const CoinCard = ({ coin }: CoinCardProps) => {
       <div className="min-[500px]:justify-betweens flex flex-col gap-x-1 min-[500px]:flex-row">
         <div className="w-full min-[500px]:w-1/2">
           <p>
-            Price:
+            {t("labels.price")}:
             <span className="font-medium">
               {coin?.current_price
                 ? formatCurrency({ number: coin.current_price })
-                : MESSAGES.NO_PROVIDED_DATA}
+                : t(MESSAGES.NO_PROVIDED_DATA)}
             </span>
           </p>
-          <p>
-            Market cap:
+          <p className="mt-4 flex w-full flex-wrap min-[500px]:flex-col">
+            {t("labels.market_cap")}:
             <span className="font-medium">
               {coin?.market_cap
                 ? formatCurrency({ number: coin.market_cap })
-                : MESSAGES.NO_PROVIDED_DATA}
+                : t(MESSAGES.NO_PROVIDED_DATA)}
             </span>
           </p>
           <div className="mt-2 flex gap-x-4 min-[500px]:mt-4">
-            <p className="flex gap-x-1">
-              24h:
+            <p className="flex flex-wrap gap-x-1">
+              {t("time.in_hours", { value: 24 })}:
               {coin?.price_change_percentage_24h_in_currency ? (
                 <ChangePercentage percentage={coin.price_change_percentage_24h_in_currency} />
               ) : (
                 MESSAGES.EMPTY_CARD_VALUE
               )}
             </p>
-            <p className="flex gap-x-1">
-              7d:
+            <p className="flex flex-wrap gap-x-1">
+              {t("time.in_days", { value: 7 })}:
               {coin?.price_change_percentage_7d_in_currency ? (
                 <ChangePercentage percentage={coin.price_change_percentage_7d_in_currency} />
               ) : (
@@ -76,7 +79,7 @@ const CoinCard = ({ coin }: CoinCardProps) => {
             </p>
           </div>
         </div>
-        <div className="w-full min-[500px]:w-1/2">
+        <div className="flex w-full items-center min-[500px]:w-1/2">
           {coin?.sparkline_in_7d.price ? (
             <SparklineChart
               height={96}
@@ -84,7 +87,7 @@ const CoinCard = ({ coin }: CoinCardProps) => {
               variant={coin?.price_change_percentage_7d_in_currency > 0 ? "success" : "destructive"}
             />
           ) : (
-            MESSAGES.NO_PROVIDED_CHARTS
+            t(MESSAGES.NO_PROVIDED_CHART)
           )}
         </div>
       </div>

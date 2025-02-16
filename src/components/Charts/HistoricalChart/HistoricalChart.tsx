@@ -79,7 +79,7 @@ const HistoricalChart = ({
           </AreaChart>
         </ResponsiveContainer>
       ) : (
-        <p>{MESSAGES.NO_PROVIDED_CHARTS}</p>
+        <p>{MESSAGES.NO_PROVIDED_CHART}</p>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import Button from "../Button";
 import AuthModal from "../Modals/AuthModal";
@@ -9,6 +10,8 @@ import { type Tab } from "../Modals/AuthModal/AuthModal";
 
 const AuthButtons = () => {
   const [tab, setTab] = useState<Tab>("login");
+
+  const { t } = useTranslation();
   const { isModalOpen, onModalOpen, onModalClose } = useModal();
 
   const onTabChange = (tab: Tab) => {
@@ -22,14 +25,14 @@ const AuthButtons = () => {
 
   return (
     <>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-4 lg:flex-row lg:gap-2">
         <div className="min-w-25">
           <Button
             onClick={() => {
               onButtonClick("login");
             }}
           >
-            Login
+            {t("buttons.login")}
           </Button>
         </div>
         <div className="min-w-25">
@@ -39,7 +42,7 @@ const AuthButtons = () => {
             }}
             variant="bordered"
           >
-            Sign up
+            {t("buttons.sign_up")}
           </Button>
         </div>
       </div>

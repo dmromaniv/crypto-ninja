@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, ChangeEvent, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
 import SelectSkeleton from "./SelectSkeleton";
@@ -38,6 +39,8 @@ const Select = ({
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const { t } = useTranslation();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -125,7 +128,7 @@ const Select = ({
               <input
                 type="text"
                 className="w-full border-b border-border p-2 focus:outline-none dark:border-border-dark"
-                placeholder="Search..."
+                placeholder={t("placeholders.search")}
                 value={searchQuery}
                 onChange={onInputChange}
               />
@@ -157,7 +160,7 @@ const Select = ({
               ) : (
                 <li>
                   <p className="p-3 text-start text-sm text-muted-fg dark:text-muted-fg-dark">
-                    {MESSAGES.NO_FOUND}
+                    {t(MESSAGES.NO_FOUND)}
                   </p>
                 </li>
               )}

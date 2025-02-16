@@ -1,7 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import AuthButtons from "../AuthButtons";
-import Language from "@components/Language";
+import LanguageSwitcher from "../LanguageSwitcher";
 import ThemeSwitch from "@components/ThemeSwitch";
 import Logo from "@components/Logo";
 import SearchModal from "../Modals/SearchModal/SearchModal";
@@ -10,6 +11,7 @@ import MobMenuModal from "../Modals/MobMenuModal/MobMenuModal";
 import navigation from "@/constants/navigation";
 
 const Header = () => {
+  const { t } = useTranslation();
   return (
     <header className="border-b border-b-border/40 bg-light dark:border-b-border-dark dark:bg-accent-dark">
       <div className="container mx-auto flex h-20 max-w-[1300px] items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -31,7 +33,7 @@ const Header = () => {
                       }}
                       to={link.path}
                     >
-                      {link.name}
+                      {t(link.name)}
                     </NavLink>
                   </li>
                 );
@@ -46,7 +48,7 @@ const Header = () => {
 
             <div className="hidden items-center gap-x-4 lg:flex lg:gap-x-6">
               <div className="flex items-center gap-x-2">
-                <Language />
+                <LanguageSwitcher />
                 <ThemeSwitch />
               </div>
 
