@@ -11,16 +11,18 @@ interface InputProps {
   className?: string;
   iconButton?: ReactNode;
   isDisabled?: boolean;
+  value?: string;
   onChange?: () => void;
 }
 
 const Input = ({
   name,
+  value,
   label,
-  type = "text",
-  placeholder = "",
   className,
   iconButton,
+  type = "text",
+  placeholder = "",
   isDisabled = false,
   onChange,
 }: InputProps) => {
@@ -33,10 +35,6 @@ const Input = ({
       )}
     >
       <input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        disabled={isDisabled}
         className={clsx(
           "peer h-full cursor-pointer border-none bg-transparent text-sm text-fg/90 focus:border-transparent focus:ring-0 focus:outline-none dark:text-fg-dark",
           label && "py-1",
@@ -44,6 +42,11 @@ const Input = ({
           iconButton && "w-[calc(100%-1.25rem)]",
           className && className
         )}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        disabled={isDisabled}
+        value={value}
         onChange={onChange}
       />
 

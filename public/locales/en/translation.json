@@ -92,6 +92,11 @@
     "no_results": "No results found"
   },
 
+  "notification": {
+    "registration_success": "You have successfully registered",
+    "login_success": "You have successfully logged in"
+  },
+
   "tooltips": {
     "change_theme": "Use to switch theme",
     "trigger_search": "Use to trigger search",
@@ -107,6 +112,14 @@
     "confirm_password": "Confirm password",
     "password_rules": "Password must contain at least {{characters}} characters including {{up_letter}} uppercase letter, {{low_letter}} lowercase letter, {{number}} number",
     "search_dynamic": "Search {{value}}"
+  },
+
+  "validation": {
+    "required": "This field is required",
+    "email": "Invalid email address",
+    "min_characters": "Must be at least {{count}} characters",
+    "password_match": "Passwords must match",
+    "password_strength": "Password does not meet the security requirements"
   },
 
   "links": {
