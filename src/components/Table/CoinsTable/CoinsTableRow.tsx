@@ -6,8 +6,6 @@ import SparklineChart from "@/components/Charts/SparklineChart/SparklineChart";
 
 import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
-import { formatCurrency } from "@/utils/format";
-
 import { MESSAGES } from "@/constants/messages";
 
 import type { Coin } from "@/types/coin";
@@ -51,7 +49,9 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
             </td>
             <td className="font-medium">
               {coin?.current_price
-                ? formatCurrency({ number: coin.current_price })
+                ? t("number.currency_standard", {
+                    value: coin.current_price,
+                  })
                 : MESSAGES.EMPTY_TABLE_VALUE}
             </td>
             <td>
@@ -70,7 +70,9 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
             </td>
             <td>
               {coin?.market_cap
-                ? formatCurrency({ number: coin.market_cap })
+                ? t("number.currency_standard", {
+                    value: coin.market_cap,
+                  })
                 : MESSAGES.EMPTY_TABLE_VALUE}
             </td>
             <td>

@@ -123,5 +123,17 @@
     "in_hours": "{{value}} h",
     "in_days": "{{value}} d",
     "in_months": "{{value}} m"
+  },
+
+  "number": {
+    "currency_compact": "{{value, formatCurrency(notation: compact)}}",
+    "currency_standard": "{{value, formatCurrency(notation: standard)}}"
+  },
+
+  "date": {
+    "date_short": "{{value, formatDateTime(format: short)}}",
+    "datetime_short": "{{value, formatDateTime}}",
+    "datetime_long": "{{value, formatDateTime(format: long)}}",
+    "datetime_custom": "{{value, formatDateTime}}"
   }
 }

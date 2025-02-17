@@ -1,7 +1,5 @@
 import Card from "../Card";
 
-import { formatCurrency } from "@/utils/format";
-
 import { MESSAGES } from "@/constants/messages";
 import { useTranslation } from "react-i18next";
 
@@ -19,7 +17,9 @@ const MarketCapCard = ({ marketCap }: MarketCapCardProps) => {
       </div>
       <p className="text-lg font-medium">
         {marketCap
-          ? formatCurrency({ number: marketCap, notation: "compact" })
+          ? t("number.currency_compact", {
+              value: marketCap,
+            })
           : t(MESSAGES.NO_PROVIDED_DATA)}
       </p>
     </Card>

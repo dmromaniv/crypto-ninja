@@ -1,18 +1,10 @@
-import { formatTimestamp } from "@/utils/format";
-
-import { dateTimeConfig } from "@/config/formatConfig";
-
-import type { TickItem } from "recharts/types/util/types";
-
 interface CustomTickProps {
   x: number;
   y: number;
-  payload: TickItem;
+  value: string;
 }
 
-const CustomXTick = ({ x, y, payload }: CustomTickProps) => {
-  const formattedDate = formatTimestamp(payload.value, dateTimeConfig.shortDate);
-
+const CustomXTick = ({ x, y, value }: CustomTickProps) => {
   return (
     <g>
       <text
@@ -22,7 +14,7 @@ const CustomXTick = ({ x, y, payload }: CustomTickProps) => {
         textAnchor="middle"
         className="fill-accent-fg text-xs dark:fill-accent-fg-dark"
       >
-        {formattedDate}
+        {value}
       </text>
     </g>
   );

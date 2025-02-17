@@ -9,9 +9,9 @@ import {
   YAxis,
 } from "recharts";
 
-import CustomXTick from "../CustomXTick";
 import CustomTooltip from "./CustomTooltip";
-import CustomYTick from "../CustomYTick";
+import HistoricalXTick from "./HistoricalXTick";
+import HistoricalYTick from "./HistoricalYTick";
 
 import { MESSAGES } from "@/constants/messages";
 
@@ -19,12 +19,14 @@ type HistoricalData = [number, number];
 
 interface CoinPricesChartProps {
   historicalData: HistoricalData[];
+  daysRange: number;
   chartStroke?: string;
   height?: number;
 }
 
 const HistoricalChart = ({
   historicalData,
+  daysRange,
   chartStroke = "#8884d8",
   height = 300,
 }: CoinPricesChartProps) => {
@@ -51,7 +53,7 @@ const HistoricalChart = ({
             <XAxis
               dataKey="timestamp"
               strokeWidth={0.1}
-              tick={(props) => <CustomXTick {...props} />}
+              tick={(props) => <HistoricalXTick {...props} daysRange={daysRange} />}
               axisLine={{ stroke: "#e5e7eb" }}
             />
             <YAxis
@@ -59,7 +61,7 @@ const HistoricalChart = ({
               axisLine={false}
               tickLine={false}
               width={75}
-              tick={(props) => <CustomYTick {...props} />}
+              tick={(props) => <HistoricalYTick {...props} />}
             />
             <CartesianGrid
               className="stroke-axis dark:stroke-axis-dark"

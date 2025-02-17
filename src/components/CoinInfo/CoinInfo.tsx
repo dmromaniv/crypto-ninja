@@ -7,8 +7,6 @@ import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
 import { useGetCoinByIdQuery } from "@/store/api/coins";
 
-import { formatCurrency } from "@/utils/format";
-
 import { MESSAGES } from "@/constants/messages";
 const CoinInfo = () => {
   const { id } = useParams();
@@ -29,7 +27,9 @@ const CoinInfo = () => {
 
       <p className="flex items-center gap-x-2 text-xl font-medium">
         {coin?.current_price?.["usd"] &&
-          formatCurrency({ number: coin.current_price["usd"], notation: "compact" })}
+          t("number.currency_standard", {
+            value: coin.current_price["usd"],
+          })}
 
         {coin?.price_change_percentage_24h_in_currency?.["usd"] && (
           <p className="flex gap-x-1">
@@ -44,7 +44,9 @@ const CoinInfo = () => {
         {t("labels.market_cap_full")}:
         <span className="pl-1 font-medium">
           {coin?.market_cap?.["usd"]
-            ? formatCurrency({ number: coin.market_cap["usd"], notation: "compact" })
+            ? t("number.currency_standard", {
+                value: coin.market_cap["usd"],
+              })
             : MESSAGES.EMPTY_VALUE}
         </span>
       </p>
@@ -52,7 +54,9 @@ const CoinInfo = () => {
         {t("labels.total_volume")}:
         <span className="pl-1 font-medium">
           {coin?.total_volume?.["usd"]
-            ? formatCurrency({ number: coin.total_volume["usd"], notation: "compact" })
+            ? t("number.currency_standard", {
+                value: coin.total_volume["usd"],
+              })
             : MESSAGES.EMPTY_VALUE}
         </span>
       </p>

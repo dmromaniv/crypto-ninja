@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import ChangePercentage from "@/components/ChangePercentage";
 import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
-
-import { formatCurrency } from "@/utils/format";
 
 import { MESSAGES } from "@/constants/messages";
 
@@ -16,6 +15,7 @@ interface TrendingCoinsListProps {
 
 const TrendingCoinsList = ({ coins, count = coins.length }: TrendingCoinsListProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onItemClick = (id: string) => {
     navigate(`/coins/${id}`);
@@ -52,7 +52,9 @@ const TrendingCoinsList = ({ coins, count = coins.length }: TrendingCoinsListPro
 
             <p className="flex flex-col items-end gap-x-4 gap-y-1 md:flex-row md:items-center">
               {coin?.data?.price
-                ? formatCurrency({ number: coin.data.price, notation: "compact" })
+                ? t("number.currency_compact", {
+                    value: coin?.data?.price,
+                  })
                 : MESSAGES.NO_DATA}
               {coin?.data?.price_change_percentage_24h?.usd && (
                 <ChangePercentage percentage={coin.data.price_change_percentage_24h.usd} />

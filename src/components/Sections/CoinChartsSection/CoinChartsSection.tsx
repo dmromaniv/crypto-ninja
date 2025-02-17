@@ -39,12 +39,12 @@ const CoinChartsSection = () => {
               <HistoricalChartFilter onFilterSet={onFilterSet} currentFilterValue={daysRange} />
             </div>
 
-            <HistoricalChart historicalData={data.prices || []} />
+            <HistoricalChart daysRange={daysRange} historicalData={data.prices || []} />
           </div>
           <div>
             <h2 className="mb-4 text-lg">{t("labels.market_cap_full")}</h2>
 
-            <HistoricalChart historicalData={data.market_caps || []} />
+            <HistoricalChart daysRange={daysRange} historicalData={data.market_caps || []} />
           </div>
         </div>
       </section>

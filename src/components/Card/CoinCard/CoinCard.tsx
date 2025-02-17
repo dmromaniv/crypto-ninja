@@ -8,8 +8,6 @@ import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 import ArrowIcon from "@/assets/icons/ArrowIcon";
 import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
-import { formatCurrency } from "@/utils/format";
-
 import { MESSAGES } from "@/constants/messages";
 
 import { type Coin } from "@/types/coin";
@@ -48,7 +46,9 @@ const CoinCard = ({ coin }: CoinCardProps) => {
             {t("labels.price")}:
             <span className="font-medium">
               {coin?.current_price
-                ? formatCurrency({ number: coin.current_price })
+                ? t("number.currency_standard", {
+                    value: coin.current_price,
+                  })
                 : t(MESSAGES.NO_PROVIDED_DATA)}
             </span>
           </p>
@@ -56,7 +56,9 @@ const CoinCard = ({ coin }: CoinCardProps) => {
             {t("labels.market_cap")}:
             <span className="font-medium">
               {coin?.market_cap
-                ? formatCurrency({ number: coin.market_cap })
+                ? t("number.currency_standard", {
+                    value: coin.market_cap,
+                  })
                 : t(MESSAGES.NO_PROVIDED_DATA)}
             </span>
           </p>
