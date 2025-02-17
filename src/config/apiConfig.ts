@@ -16,3 +16,7 @@ export const searchParamsKeys = {
   category: "category",
   order: "order",
 };
+
+export const pollingInterval = {
+  coins: 60000, // Update coins: Every 1 minute
+};
