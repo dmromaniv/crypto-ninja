@@ -97,6 +97,11 @@
     "no_results": "Нічого не знайдено"
   },
 
+  "notification": {
+    "registration_success": "Ви успішно зареєструвалися",
+    "login_success": "Ви успішно ввійшли"
+  },
+
   "placeholders": {
     "select_category": "Оберіть категорію",
     "search": "Пошук",
@@ -112,6 +117,14 @@
     "change_theme": "Для зміни теми",
     "trigger_search": "Для відкриття пошуку",
     "market_cap_info": "Ринкова капіталізація – це загальна вартість усіх монет."
+  },
+
+  "validation": {
+    "required": "Це поле є обов'язковим",
+    "email": "Невірна електронна адреса",
+    "min_characters": "Має бути не менше {{count}} символів",
+    "password_match": "Паролі повинні збігатися",
+    "password_strength": "Пароль не відповідає вимогам безпеки"
   },
 
   "links": {

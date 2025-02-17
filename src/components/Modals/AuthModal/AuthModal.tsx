@@ -2,9 +2,8 @@ import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 
 import Modal from "../Modal";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
-import Checkbox from "@/components/Checkbox/Checkbox";
+import RegisterForm from "@/components/Form/RegisterForm";
+import LoginForm from "@/components/Form/LoginForm";
 
 export type Tab = "login" | "signup";
 
@@ -62,46 +61,12 @@ const AuthModal = ({ isModalOpen, tab, onClose, onTabChange }: AuthModalProps) =
                 {t("links.service_terms")}
               </a>
             </p>
-            <form>
-              {tab === "signup" ? (
-                <div className="mb-8 flex flex-col gap-y-5">
-                  <div className="h-13">
-                    <Input name="email" label={t("placeholders.email")} />
-                  </div>
-                  <div className="h-13">
-                    <Input name="password" label={t("placeholders.password")} />
-                  </div>
-                  <div>
-                    <div className="h-13">
-                      <Input name="confirm_pass" label={t("placeholders.confirm_password")} />
-                    </div>
-                    <p className="mt-2 text-xs font-light text-fg/60 dark:text-fg-dark/50">
-                      {t("placeholders.password_rules", {
-                        characters: 6,
-                        up_letter: 1,
-                        low_letter: 1,
-                        number: 1,
-                      })}
-                    </p>
-                  </div>
 
-                  <Checkbox name="news" text={t("labels.get_updates")} />
-                </div>
-              ) : (
-                <div className="mb-8 flex flex-col gap-y-5">
-                  <div className="h-13">
-                    <Input name="email" label={t("placeholders.email")} />
-                  </div>
-                  <div className="h-13">
-                    <Input name="password" label={t("placeholders.password")} />
-                  </div>
-                </div>
-              )}
-
-              <Button type="submit">
-                {t(tab === "signup" ? "buttons.sign_up" : "buttons.login")}
-              </Button>
-            </form>
+            {tab === "signup" ? (
+              <RegisterForm onClose={onClose} />
+            ) : (
+              <LoginForm onClose={onClose} />
+            )}
           </div>
         </Modal>
       )}
