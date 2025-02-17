@@ -25,7 +25,6 @@ export default tseslint.config(
       "no-console": ["error", { allow: ["warn", "error"] }],
       "default-case-last": "error",
       eqeqeq: "error",
-      "no-empty-function": "error",
       "no-useless-return": "error",
       "prefer-const": "error",
     },

@@ -1,0 +1,152 @@
+{
+  "home": {
+    "main_heading": "Cryptocurrency Market Prices & Capitalization",
+    "sub_heading_one": "We are listing <0>{{count}}</0> coin",
+    "sub_heading_other": "We are listing <0>{{count}}</0> coins"
+  },
+  "exchanges": {
+    "main_heading": "Top Crypto Exchanges",
+    "sub_heading_one": "ranked by Trust Score"
+  },
+
+  "about": {
+    "title": "About CryptoNinja",
+    "intro": "Welcome to <1>CryptoNinja</1>, your go-to platform for tracking the latest cryptocurrency data in real time!",
+
+    "what_is_title": "What is CryptoNinja?",
+    "what_is_desc": "<0>CryptoNinja</0> is a pet project designed to provide up-to-date crypto market data in a simple and user-friendly interface. <br/> Whether you're a beginner exploring the world of digital assets or an experienced trader looking for quick insights, CryptoNinja helps you stay informed.",
+
+    "where_data_title": "Where Does the Data Come From?",
+    "where_data_desc": "All the market data displayed on <1>CryptoNinja</1> is fetched from the <3>CoinGecko API</3>, one of the most reliable sources for cryptocurrency price tracking. This ensures that you get accurate and real-time updates on price movements, market trends, and more.",
+
+    "features_title": "Features of CryptoNinja",
+    "features_list": [
+      "Live cryptocurrency prices and market data",
+      "Detailed coin information and price history",
+      "A sleek, modern UI for a smooth user experience"
+    ],
+
+    "whats_next_title": "What’s Next?",
+    "whats_next_desc": "I’m always looking to improve CryptoNinja! Some future enhancements may include:",
+    "whats_next_list": [
+      "Advanced filtering and search options",
+      "Interactive charts for price history",
+      "Custom watchlists and portfolio tracking"
+    ],
+
+    "thanks": "Thanks for visiting! Feel free to explore the site and stay up to date with the latest crypto trends."
+  },
+
+  "footer": {
+    "description": "Track crypto prices, trends, and market insights"
+  },
+
+  "login": {
+    "terms": "By continuing, you agree to"
+  },
+
+  "navigation": {
+    "exchanges": "Exchanges",
+    "about": "About"
+  },
+
+  "labels": {
+    "trending_coins": "Trending Coins",
+    "trending_categories": "Trending Categories",
+    "total_volume": "Total Volume",
+    "price": "Price",
+    "dominance": "Dominance",
+    "market_cap": "Market Cap",
+    "market_cap_full": "Market Capitalization",
+    "coin_one": "Coin",
+    "coin_other": "Coins",
+    "coins": "Coins",
+    "category": "Category",
+    "categories": "Categories",
+    "last_days": "Last {{value}} Days",
+    "exchange": "Exchange",
+    "exchanges": "Exchanges",
+    "trust_score": "Trust Score",
+    "country": "Country",
+    "language": "Language",
+    "change_settings": "Change settings",
+    "theme": "Theme",
+    "set_theme_light": "Set light theme",
+    "set_theme_dark": "Set dark theme",
+    "established": "Established",
+    "volume_normalized_period": "$t(time.in_hours, {\"value\": {{value}} }) Volume (Normalized)",
+    "volume_period": "$t(time.in_hours, {\"value\": {{value}} }) Volume",
+    "show_items": "Show",
+    "get_updates": "Stay updated with CryptoNinja news",
+    "agree_terms_desc": "By continuing, you agree to",
+    "login": "Login",
+    "sign_up": "Sign up"
+  },
+
+  "messages": {
+    "no_data": "No data available",
+    "no_provided_data": "No provided data",
+    "no_provided_chart": "No provided chart",
+    "no_coins": "No available coins",
+    "no_exchanges": "No available exchanges",
+    "no_results": "No results found"
+  },
+
+  "notification": {
+    "registration_success": "You have successfully registered",
+    "login_success": "You have successfully logged in"
+  },
+
+  "tooltips": {
+    "change_theme": "Use to switch theme",
+    "trigger_search": "Use to trigger search",
+    "market_cap_info": "Market capitalization is the total value of a cryptocurrency's supply."
+  },
+
+  "placeholders": {
+    "select_category": "Select a category",
+    "search": "Search",
+    "search_coin": "Search coin",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "password_rules": "Password must contain at least {{characters}} characters including {{up_letter}} uppercase letter, {{low_letter}} lowercase letter, {{number}} number",
+    "search_dynamic": "Search {{value}}"
+  },
+
+  "validation": {
+    "required": "This field is required",
+    "email": "Invalid email address",
+    "min_characters": "Must be at least {{count}} characters",
+    "password_match": "Passwords must match",
+    "password_strength": "Password does not meet the security requirements"
+  },
+
+  "links": {
+    "view_more": "View more",
+    "service_terms": "Terms of Service"
+  },
+
+  "buttons": {
+    "login": "Log In",
+    "sign_up": "Sign Up"
+  },
+
+  "time": {
+    "in_hours": "{{value}} h",
+    "in_days": "{{value}} d",
+    "in_months": "{{value}} m"
+  },
+
+  "number": {
+    "currency_compact": "{{value, formatCurrency(notation: compact)}}",
+    "currency_standard": "{{value, formatCurrency(notation: standard)}}"
+  },
+
+  "date": {
+    "date_short": "{{value, formatDateTime(format: short)}}",
+    "datetime_short": "{{value, formatDateTime}}",
+    "datetime_long": "{{value, formatDateTime(format: long)}}",
+    "datetime_custom": "{{value, formatDateTime}}"
+  }
+}
