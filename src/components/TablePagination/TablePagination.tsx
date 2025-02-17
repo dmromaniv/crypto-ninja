@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import Select, { SelectValue } from "@/components/Select/Select";
 import Pagination from "../Pagination";
@@ -14,6 +15,8 @@ const TablePagination = () => {
       perPageSelectOptions[0]
   );
 
+  const { t } = useTranslation();
+
   const onItemsSelect = (option: SelectValue) => {
     setSelectedValue(option);
     onItemsPerPageSelect(option);
@@ -24,7 +27,7 @@ const TablePagination = () => {
       <Pagination currentPage={page} onPageChange={onPageChange} />
 
       <div className="absolute right-0 flex items-center gap-x-2">
-        <p>Show:</p>
+        <p>{t("labels.show_items")}:</p>
         <div className="w-15">
           <Select
             selectedValue={selectedValue}

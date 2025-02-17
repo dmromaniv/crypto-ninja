@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import ArrowIcon from "@/assets/icons/ArrowIcon";
 
 import useSortOrder from "@/hooks/useSortOrder";
@@ -5,6 +7,8 @@ import useSortOrder from "@/hooks/useSortOrder";
 import { COINS_ORDER_MAP } from "@/constants/sort";
 
 const CoinsTableHead = () => {
+  const { t } = useTranslation();
+
   const { onOrderToggle, order } = useSortOrder({ orderOptions: COINS_ORDER_MAP });
 
   return (
@@ -24,12 +28,12 @@ const CoinsTableHead = () => {
           />
         </div>
       </th>
-      <th className="w-[35%]">Coin</th>
-      <th>Price</th>
-      <th className="w-[8%]"> 24h %</th>
-      <th className="w-[8%]">7d %</th>
-      <th className="w-[15%]">Market cap</th>
-      <th className="w-[15%]">Last 7 Days</th>
+      <th className="w-[35%]">{t("labels.coin", { count: 1 })}</th>
+      <th>{t("labels.price")}</th>
+      <th className="w-[8%]">{t("time.in_hours", { value: 24 })} %</th>
+      <th className="w-[8%]">{t("time.in_days", { value: 7 })} %</th>
+      <th className="w-[15%]">{t("labels.market_cap")}</th>
+      <th className="w-[15%]">{t("labels.last_days", { value: 7 })}</th>
     </tr>
   );
 };

@@ -1,13 +1,17 @@
+import { useTranslation } from "react-i18next";
+
 const ExchangesTableHead = () => {
+  const { t } = useTranslation();
+
   return (
     <tr>
       <th>#</th>
-      <th className="w-[33%]">Exchange</th>
-      <th className="w-[5%]">Trust Score</th>
-      <th className="w-[25%]">Country</th>
-      <th className="w-[5%]">Established</th>
-      <th>24h Volume (Normalized)</th>
-      <th className="w-[18%]">24h Volume</th>
+      <th className="w-[33%]">{t("labels.exchange")}</th>
+      <th className="w-[5%]">{t("labels.trust_score")}</th>
+      <th className="w-[25%]">{t("labels.country")}</th>
+      <th className="w-[5%]">{t("labels.established")}</th>
+      <th>{t("labels.volume_normalized_period", { value: 24 })}</th>
+      <th className="w-[18%]">{t("labels.volume_period", { value: 24 })}</th>
     </tr>
   );
 };

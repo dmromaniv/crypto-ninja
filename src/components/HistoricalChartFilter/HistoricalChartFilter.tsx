@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 import { historicalChartFilters } from "@/config/uiConfig";
 
@@ -8,6 +9,7 @@ interface HistoricalChartFilterProps {
 }
 
 const HistoricalChartFilter = ({ onFilterSet, currentFilterValue }: HistoricalChartFilterProps) => {
+  const { t } = useTranslation();
   return (
     <ul className="inline-flex justify-end gap-x-2 rounded-md bg-accent dark:bg-accent-dark">
       {historicalChartFilters.map((filter) => {
@@ -26,7 +28,7 @@ const HistoricalChartFilter = ({ onFilterSet, currentFilterValue }: HistoricalCh
                   : "cursor-pointer text-accent-fg dark:text-fg-dark"
               )}
             >
-              {filter.label}
+              {t(filter.label, { value: filter.interpolationValue })}
             </button>
           </li>
         );

@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Modal from "../Modal";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ThemeSwitch from "@/components/ThemeSwitch";
+import AuthButtons from "@/components/AuthButtons";
 import IconButton from "@/components/IconButton";
-import Button from "@/components/Button";
 
 import BurgerIcon from "@/assets/icons/BurgerIcon";
 
@@ -11,6 +14,8 @@ import useModal from "@/hooks/useModal";
 import navigation from "@/constants/navigation";
 
 const MobMenuModal = () => {
+  const { t } = useTranslation();
+
   const { isModalOpen, onModalOpen, onModalClose } = useModal();
 
   return (
@@ -42,22 +47,25 @@ const MobMenuModal = () => {
                       }}
                       to={link.path}
                     >
-                      {link.name}
+                      {t(link.name)}
                     </NavLink>
                   </li>
                 );
               })}
             </ul>
-            <div className="flex gap-2">
-              <div className="flex-grow">
-                <Button onClick={() => {}}>Login</Button>
-              </div>
-              <div className="flex-grow">
-                <Button onClick={() => {}} variant="bordered">
-                  Sign up
-                </Button>
+            <div className="flex flex-col gap-y-3">
+              {t("labels.change_settings")}
+              <div>
+                <p className="mb-1 flex gap-x-3">
+                  {t("labels.language")}: <LanguageSwitcher />
+                </p>
+                <p className="flex gap-x-3">
+                  <ThemeSwitch />
+                </p>
               </div>
             </div>
+
+            <AuthButtons />
           </div>
         </Modal>
       )}

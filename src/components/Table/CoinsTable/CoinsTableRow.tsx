@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 import SparklineChart from "@/components/Charts/SparklineChart/SparklineChart";
 
 import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
-
-import { formatCurrency } from "@/utils/format";
 
 import { MESSAGES } from "@/constants/messages";
 
@@ -17,6 +16,7 @@ interface CoinsTableRowProps {
 
 const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onRowClick = (id: string) => {
     navigate(`coins/${id}`);
@@ -49,7 +49,9 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
             </td>
             <td className="font-medium">
               {coin?.current_price
-                ? formatCurrency({ number: coin.current_price })
+                ? t("number.currency_standard", {
+                    value: coin.current_price,
+                  })
                 : MESSAGES.EMPTY_TABLE_VALUE}
             </td>
             <td>
@@ -68,7 +70,9 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
             </td>
             <td>
               {coin?.market_cap
-                ? formatCurrency({ number: coin.market_cap })
+                ? t("number.currency_standard", {
+                    value: coin.market_cap,
+                  })
                 : MESSAGES.EMPTY_TABLE_VALUE}
             </td>
             <td>
@@ -80,7 +84,7 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
                   }
                 />
               ) : (
-                MESSAGES.NO_PROVIDED_CHARTS
+                t(MESSAGES.NO_PROVIDED_CHART)
               )}
             </td>
           </tr>

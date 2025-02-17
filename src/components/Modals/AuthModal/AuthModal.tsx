@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 import Modal from "../Modal";
 import Input from "@/components/Input";
@@ -15,6 +16,8 @@ interface AuthModalProps {
 }
 
 const AuthModal = ({ isModalOpen, tab, onClose, onTabChange }: AuthModalProps) => {
+  const { t } = useTranslation();
+
   return (
     <>
       {isModalOpen && (
@@ -32,7 +35,7 @@ const AuthModal = ({ isModalOpen, tab, onClose, onTabChange }: AuthModalProps) =
                   onTabChange("login");
                 }}
               >
-                Login
+                {t("labels.login")}
               </button>
 
               <button
@@ -46,52 +49,58 @@ const AuthModal = ({ isModalOpen, tab, onClose, onTabChange }: AuthModalProps) =
                   onTabChange("signup");
                 }}
               >
-                Signup
+                {t("labels.sign_up")}
               </button>
             </div>
             <p className="text-xs">
               <span className="text-base font-medium">
-                {tab === "login" ? "Log in" : "Sign up"}
+                {tab === "login" ? t("labels.login") : t("labels.sign_up")}
               </span>
               <br />
-              By continuing, you agree to CryptoNinja:
+              {t("labels.agree_terms_desc")}:
               <a href="#" className="pl-1 text-primary underline">
-                Terms of Service
+                {t("links.service_terms")}
               </a>
             </p>
             <form>
               {tab === "signup" ? (
                 <div className="mb-8 flex flex-col gap-y-5">
                   <div className="h-13">
-                    <Input name="email" label="Email" />
+                    <Input name="email" label={t("placeholders.email")} />
                   </div>
                   <div className="h-13">
-                    <Input name="password" label="Password" />
+                    <Input name="password" label={t("placeholders.password")} />
                   </div>
                   <div>
                     <div className="h-13">
-                      <Input name="confirm_pass" label="Confirm password" />
+                      <Input name="confirm_pass" label={t("placeholders.confirm_password")} />
                     </div>
                     <p className="mt-2 text-xs font-light text-fg/60 dark:text-fg-dark/50">
-                      Password must contain at least 6 characters including 1 uppercase letter, 1
-                      lowercase letter, 1 number
+                      {t("placeholders.password_rules", {
+                        characters: 6,
+                        up_letter: 1,
+                        low_letter: 1,
+                        number: 1,
+                      })}
                     </p>
                   </div>
 
-                  <Checkbox name="news" text="Get CryptoNinja updates on news" />
+                  <Checkbox name="news" text={t("labels.get_updates")} />
                 </div>
               ) : (
                 <div className="mb-8 flex flex-col gap-y-5">
                   <div className="h-13">
-                    <Input name="email" label="Email" />
+                    <Input name="email" label={t("placeholders.email")} />
                   </div>
                   <div className="h-13">
-                    <Input name="password" label="Password" />
+                    <Input name="password" label={t("placeholders.password")} />
                   </div>
                 </div>
               )}
 
-              <Button type="submit">Login</Button>
+              <Button type="submit">
+                {t(tab === "signup" ? "buttons.sign_up" : "buttons.login")}
+              </Button>
             </form>
           </div>
         </Modal>

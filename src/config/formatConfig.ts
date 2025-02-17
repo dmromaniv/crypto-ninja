@@ -19,10 +19,17 @@ export const currencyConfig = {
   },
 };
 
+export const defaultFractionDigits = {
+  min: 0,
+  max: 20,
+};
+
 export const dateTimeConfig = {
   shortDate: "dd MMM",
   fullDate: "dd MMMM yyyy",
 
-  shortDateTime: "dd MMMM HH:mm",
-  fullDateTime: "d MMMM yyyy, HH:mm",
+  // localized: date-fns
+  localizedTime: "p", // 12:00 AM
+  localizedShortDateTime: "PP", //May 19, 2025
+  localizedLongDateTime: "PPpp", //May 29, 2025, 12:00 AM
 };

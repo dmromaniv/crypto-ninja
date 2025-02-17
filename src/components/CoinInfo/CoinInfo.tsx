@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Skeleton from "react-loading-skeleton";
 import ChangePercentage from "../ChangePercentage";
@@ -6,13 +7,12 @@ import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
 
 import { useGetCoinByIdQuery } from "@/store/api/coins";
 
-import { formatCurrency } from "@/utils/format";
-
 import { MESSAGES } from "@/constants/messages";
-
 const CoinInfo = () => {
   const { id } = useParams();
   const { data: coin, isLoading } = useGetCoinByIdQuery(id as string);
+
+  const { t } = useTranslation();
 
   return isLoading ? (
     <Skeleton className="min-h-40" />
@@ -27,33 +27,41 @@ const CoinInfo = () => {
 
       <p className="flex items-center gap-x-2 text-xl font-medium">
         {coin?.current_price?.["usd"] &&
-          formatCurrency({ number: coin.current_price["usd"], notation: "compact" })}
+          t("number.currency_standard", {
+            value: coin.current_price["usd"],
+          })}
 
         {coin?.price_change_percentage_24h_in_currency?.["usd"] && (
           <p className="flex gap-x-1">
             <ChangePercentage percentage={coin.price_change_percentage_24h_in_currency["usd"]} />
-            <sup className="text-xs text-accent-fg/50 dark:text-accent-fg-dark/60">24h</sup>
+            <sup className="text-xs text-accent-fg/50 dark:text-accent-fg-dark/60">
+              {t("time.in_hours", { value: 24 })}
+            </sup>
           </p>
         )}
       </p>
       <p>
-        Market Capitalization:
+        {t("labels.market_cap_full")}:
         <span className="pl-1 font-medium">
           {coin?.market_cap?.["usd"]
-            ? formatCurrency({ number: coin.market_cap["usd"], notation: "compact" })
+            ? t("number.currency_standard", {
+                value: coin.market_cap["usd"],
+              })
             : MESSAGES.EMPTY_VALUE}
         </span>
       </p>
       <p>
-        Total Volume:
+        {t("labels.total_volume")}:
         <span className="pl-1 font-medium">
           {coin?.total_volume?.["usd"]
-            ? formatCurrency({ number: coin.total_volume["usd"], notation: "compact" })
+            ? t("number.currency_standard", {
+                value: coin.total_volume["usd"],
+              })
             : MESSAGES.EMPTY_VALUE}
         </span>
       </p>
       <p>
-        Categories:
+        {t("labels.categories")}:
         <span className="pl-1 font-medium">
           {coin?.categories && coin?.categories.length > 0
             ? coin.categories.join(", ")
@@ -62,7 +70,7 @@ const CoinInfo = () => {
       </p>
     </div>
   ) : (
-    <p>{MESSAGES.NO_FOUND}</p>
+    <p>{t(MESSAGES.NO_FOUND)}</p>
   );
 };
 

@@ -16,6 +16,7 @@ import { currencyConfig } from "@/config/formatConfig";
 
 const CoinsSection = () => {
   const [searchParams] = useSearchParams();
+
   const { page, itemsPerPage } = usePagination();
 
   const { data: coins, isFetching: isCoinsFetching } = useGetCoinsQuery({

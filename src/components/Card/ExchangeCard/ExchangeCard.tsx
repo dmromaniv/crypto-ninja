@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import Card from "../Card";
 import TrustScore from "@/components/TrustScore/TrustScore";
 
@@ -12,6 +14,8 @@ interface CoinCardProps {
 }
 
 const ExchangeCard = ({ exchange }: CoinCardProps) => {
+  const { t } = useTranslation();
+
   return (
     <Card>
       <div className="mb-6 flex w-full items-center justify-between">
@@ -33,7 +37,7 @@ const ExchangeCard = ({ exchange }: CoinCardProps) => {
           {exchange?.trust_score ? (
             <TrustScore score={exchange.trust_score} />
           ) : (
-            MESSAGES.EMPTY_CARD_VALUE
+            t(MESSAGES.EMPTY_CARD_VALUE)
           )}
         </p>
       </div>
@@ -41,7 +45,7 @@ const ExchangeCard = ({ exchange }: CoinCardProps) => {
       <div className="flex flex-col gap-y-3">
         <div className="flex flex-wrap items-center gap-x-2">
           <p>
-            Established:
+            {t("labels.established")}:
             <span className="pl-1 font-medium">
               {exchange?.year_established || MESSAGES.EMPTY_CARD_VALUE}
             </span>
@@ -49,33 +53,33 @@ const ExchangeCard = ({ exchange }: CoinCardProps) => {
           </p>
 
           <p>
-            Country:
+            {t("labels.country")}:
             <span className="pl-1 font-medium">
-              {exchange?.country || MESSAGES.NO_PROVIDED_DATA}
+              {exchange?.country || t(MESSAGES.NO_PROVIDED_DATA)}
             </span>
           </p>
         </div>
 
         <p>
-          24h Volume (Normalized):
+          {t("labels.volume_normalized_period", { value: 24 })}:
           <span className="font-medium">
             {exchange?.trade_volume_24h_btc_normalized ? (
               <span className="pl-1">
                 {exchange?.trade_volume_24h_btc_normalized.toFixed(2)} BTC
               </span>
             ) : (
-              MESSAGES.NO_PROVIDED_DATA
+              t(MESSAGES.NO_PROVIDED_DATA)
             )}
           </span>
         </p>
 
         <p>
-          24h Volume:
+          {t("labels.volume_period", { value: 24 })}:
           <span className="font-medium">
             {exchange?.trade_volume_24h_btc ? (
               <span className="pl-1">{exchange.trade_volume_24h_btc.toFixed(2)} BTC</span>
             ) : (
-              MESSAGES.NO_PROVIDED_DATA
+              t(MESSAGES.NO_PROVIDED_DATA)
             )}
           </span>
         </p>

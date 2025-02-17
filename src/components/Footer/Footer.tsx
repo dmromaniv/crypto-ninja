@@ -1,8 +1,14 @@
+import { useTranslation } from "react-i18next";
+
 import { Link } from "react-router-dom";
 
 import LogoIcon from "@/assets/icons/LogoIcon";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-accent dark:bg-accent-dark">
       <div className="container mx-auto max-w-[1300px] px-4 py-8 sm:px-6 lg:px-8">
@@ -16,12 +22,10 @@ const Footer = () => {
               <p className="text-lg font-bold text-accent-fg dark:text-fg-dark">
                 Crypto<span className="text-primary">Ninja</span>
                 <br />
-                <span className="text-sm font-normal">
-                  track crypto prices, trends, and market insights🚀
-                </span>
+                <span className="text-sm font-normal">{t("footer.description")}🚀</span>
               </p>
               <div className="flex flex-col gap-y-2 text-sm text-accent-fg/80 dark:text-fg-dark/80">
-                <p>Copyright © 2025. All rights reserved.</p>
+                <p>Copyright © {year}. All rights reserved.</p>
                 <p className="flex gap-x-2">
                   <span>Powered by</span>
                   <a

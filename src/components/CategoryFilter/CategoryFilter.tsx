@@ -1,7 +1,8 @@
+import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import Select, { type Option, type SelectValue } from "@/components/Select/Select";
 import Filter from "../Filter/Filter";
-
-import { useSearchParams } from "react-router-dom";
 
 import { useGetCategoriesQuery } from "@/store/api/coins";
 import useSelectOptions from "@/hooks/useSelectOptions";
@@ -12,6 +13,7 @@ import { searchParamsKeys } from "@/config/apiConfig";
 
 const CategoryFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useTranslation();
 
   const { data: categories, isLoading } = useGetCategoriesQuery();
   const { selectedValue, formattedOptions, onSelect, onClear } = useSelectOptions({
@@ -56,7 +58,7 @@ const CategoryFilter = () => {
           selectedValue={selectedValue}
           isOptionsLoading={isLoading}
           searchable
-          placeholder="Select category.."
+          placeholder={`${t("placeholders.select_category")}...`}
           onChange={onCategorySelect}
           options={formattedOptions}
         />

@@ -1,5 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 
+import { useTranslation } from "react-i18next";
+
 import ChangePercentage from "../ChangePercentage/ChangePercentage";
 
 import { useGetGlobalMarketDataQuery } from "@/store/api/market";
@@ -10,6 +12,8 @@ import { dominanceCoinsConfig } from "@/config/uiConfig";
 import { MESSAGES } from "@/constants/messages";
 
 const GlobalMarket = () => {
+  const { t } = useTranslation();
+
   const { data, isFetching } = useGetGlobalMarketDataQuery();
 
   const leadingCryptos = getLeadingCryptos(
@@ -18,9 +22,9 @@ const GlobalMarket = () => {
   );
 
   return (
-    <ul className="flex flex-wrap gap-x-3 gap-y-1 py-4 text-xs">
+    <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 py-4 text-xs">
       <li className="flex items-center gap-x-1">
-        Coins:
+        {t("labels.coins")}:
         {isFetching ? (
           <Skeleton className="h-4 min-w-8" />
         ) : (
@@ -30,7 +34,7 @@ const GlobalMarket = () => {
         )}
       </li>
       <li className="flex items-center gap-x-1">
-        Exchanges:
+        {t("labels.exchanges")}:
         {isFetching ? (
           <Skeleton className="h-4 min-w-6" />
         ) : (
@@ -38,7 +42,7 @@ const GlobalMarket = () => {
         )}
       </li>
       <li className="flex items-center gap-x-1">
-        Market Cap:
+        {t("labels.market_cap")}:
         {isFetching ? (
           <Skeleton className="h-4 min-w-10" />
         ) : data?.market_cap_change_percentage_24h_usd ? (
@@ -48,7 +52,7 @@ const GlobalMarket = () => {
         )}
       </li>
       <li className="flex items-center gap-x-1">
-        Dominance:
+        {t("labels.dominance")}:
         {isFetching ? (
           <Skeleton className="h-4 min-w-12" />
         ) : leadingCryptos.length > 0 ? (
@@ -63,7 +67,7 @@ const GlobalMarket = () => {
             );
           })
         ) : (
-          <p>{MESSAGES.NO_DATA}</p>
+          <p>{t(MESSAGES.NO_DATA)}</p>
         )}
       </li>
     </ul>

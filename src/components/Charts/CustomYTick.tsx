@@ -1,16 +1,11 @@
-import { MESSAGES } from "@/constants/messages";
-import { formatCurrency } from "@/utils/format";
-
-import type { TickItem } from "recharts/types/util/types";
-
 interface CustomTickProps {
   x: number;
   y: number;
   dy?: number;
-  payload: TickItem;
+  value: string;
 }
 
-const CustomYTick = ({ x, y, dy = 5, payload }: CustomTickProps) => {
+const CustomYTick = ({ x, y, dy = 5, value }: CustomTickProps) => {
   return (
     <g>
       <text
@@ -20,9 +15,7 @@ const CustomYTick = ({ x, y, dy = 5, payload }: CustomTickProps) => {
         textAnchor="end"
         className="fill-accent-fg text-xs dark:fill-accent-fg-dark"
       >
-        {payload?.value
-          ? formatCurrency({ number: payload.value, notation: "compact" })
-          : MESSAGES.EMPTY_VALUE}
+        {value}
       </text>
     </g>
   );

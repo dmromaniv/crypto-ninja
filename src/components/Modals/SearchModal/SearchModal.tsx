@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
 import Input from "@/components/Input";
@@ -20,6 +21,7 @@ const SearchModal = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { isModalOpen, onModalOpen, onModalClose } = useModal();
   const debouncedSearchQuery = useDebounce(searchQuery, 2000);
@@ -66,9 +68,9 @@ const SearchModal = () => {
       <div className="h-[38px]" onClick={onModalOpen}>
         <Input
           name="search"
-          placeholder="Search"
+          placeholder={t("placeholders.search")}
           iconButton={
-            <Tooltip text="Use to trigger search">
+            <Tooltip text={t("tooltips.trigger_search")}>
               <div className="flex h-4 w-4 items-center justify-center">/</div>
             </Tooltip>
           }
@@ -88,7 +90,7 @@ const SearchModal = () => {
               type="text"
               autoFocus
               value={searchQuery}
-              placeholder={"Search coin"}
+              placeholder={t("placeholders.search_coin")}
               className={clsx(
                 "border-b border-border p-2 focus:outline-none dark:border-border-dark"
               )}
@@ -102,7 +104,7 @@ const SearchModal = () => {
 
               {!isLoading && !searchQuery && (
                 <>
-                  <p className="mb-1">Trending coins</p>
+                  <p className="mb-1">{t("labels.trending_coins")}</p>
                   <TrendingCoinsList
                     coins={trendingData?.coins || []}
                     count={trendingCoinsConfig.searchModal.showInList}
@@ -141,7 +143,7 @@ const SearchModal = () => {
                       );
                     })
                   ) : (
-                    <li>{MESSAGES.NO_FOUND}</li>
+                    <li>{t(MESSAGES.NO_FOUND)}</li>
                   )}
                 </ul>
               )}
