@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -5,6 +6,10 @@ import ChangePercentage from "@/components/ChangePercentage/ChangePercentage";
 import SparklineChart from "@/components/Charts/SparklineChart/SparklineChart";
 
 import PlaceholderIcon from "@/assets/icons/PlaceholderIcon";
+
+import { ChangeDirection, useHighlightChanges } from "@/hooks/useHighlightChanges";
+
+import { highlightTextDuration } from "@/config/uiConfig";
 
 import { MESSAGES } from "@/constants/messages";
 
@@ -17,6 +22,12 @@ interface CoinsTableRowProps {
 const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const highlightedPrices = useHighlightChanges(
+    coinsData,
+    "current_price",
+    highlightTextDuration.coins
+  );
 
   const onRowClick = (id: string) => {
     navigate(`coins/${id}`);
@@ -47,7 +58,13 @@ const CoinsTableRow = ({ coinsData }: CoinsTableRowProps) => {
                 </p>
               </div>
             </td>
-            <td className="font-medium">
+            <td
+              className={clsx(
+                "font-medium",
+                highlightedPrices[coin.id] === ChangeDirection.UP && "text-success",
+                highlightedPrices[coin.id] === ChangeDirection.DOWN && "text-destructive"
+              )}
+            >
               {coin?.current_price
                 ? t("number.currency_standard", {
                     value: coin.current_price,

@@ -43,3 +43,9 @@ export const historicalChartFilters = [
     interpolationValue: 3,
   },
 ];
+
+// duration of text highlighting if the data has changed
+export const highlightTextDuration = {
+  coins: 3000,
+  default: 2000,
+};
